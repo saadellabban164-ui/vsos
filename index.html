@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>VSOS | Indie Game Studio & Experimental Web Arcade</title>
+    <meta name="title" content="VSOS | Indie Game Studio & Experimental Web Arcade">
+    <meta name="description" content="VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.">
+    <meta name="keywords" content="indie games, game developer, browser games, HTML5, javascript games, VSOS, game studio, arcade">
+    <meta name="author" content="VSOS">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vsos.itch.io">
+    <meta property="og:title" content="VSOS | Indie Game Studio & Experimental Web Arcade">
+    <meta property="og:description" content="VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.">
+    <meta property="og:image" content="https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vsos.itch.io">
+    <meta property="twitter:title" content="VSOS | Indie Game Studio & Experimental Web Arcade">
+    <meta property="twitter:description" content="VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.">
+    <meta property="twitter:image" content="https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            900: '#030014',
+                            800: '#0a071e',
+                            700: '#120e2e',
+                            600: '#1b163e'
+                        }
+                    },
+                    boxShadow: {
+                        'neon-glow': '0 0 15px rgba(139, 92, 246, 0.4)',
+                        'neon-glow-strong': '0 0 25px rgba(139, 92, 246, 0.7)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Premium Styles -->
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030014;
+            color: #f5f3ff;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glassmorphism {
+            background: rgba(18, 14, 46, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+        .glassmorphism-light {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glassmorphism-input {
+            background: rgba(10, 7, 30, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: #f5f3ff;
+            transition: all 0.3s ease;
+        }
+        .glassmorphism-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030014;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4c1d95;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+        /* Grid scanline background effect */
+        .grid-bg {
+            background-image: linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+        /* Custom Keyframe Animations */
+        @keyframes subtle-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.02); opacity: 1; }
+        }
+        .pulse-banner {
+            animation: subtle-pulse 8s infinite ease-in-out;
+        }
+    </style>
+
+    <!-- Structured Data JSON-LD for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGameOrganization",
+      "name": "VSOS",
+      "description": "VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.",
+      "logo": "https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png",
+      "image": "https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png",
+      "url": "https://vsos.itch.io",
+      "sameAs": [
+        "https://github.com/saadellabban164-ui",
+        "https://vsos.itch.io"
+      ]
+    }
+    </script>
+</head>
+<body class="grid-bg min-h-screen relative flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glassmorphism border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
+        <a href="#hero" class="flex items-center space-x-3 group" onclick="playSound('click')">
+            <img src="https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png" alt="VSOS Logo" class="h-10 w-10 rounded-lg border border-brand-500/30 group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/150'">
+            <span class="text-xl font-bold tracking-widest text-glow bg-gradient-to-r from-white via-brand-500 to-purple-400 bg-clip-text text-transparent">VSOS</span>
+        </a>
+
+        <!-- Desktop Navigation Items -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="#about" class="text-gray-300 hover:text-brand-500 transition-colors font-medium tracking-wide text-sm" onclick="playSound('click')">ABOUT</a>
+            <a href="#games" class="text-gray-300 hover:text-brand-500 transition-colors font-medium tracking-wide text-sm" onclick="playSound('click')">GAMES</a>
+            <a href="#featured" class="text-gray-300 hover:text-brand-500 transition-colors font-medium tracking-wide text-sm" onclick="playSound('click')">FEATURED</a>
+            <a href="https://github.com/saadellabban164-ui" target="_blank" class="text-gray-300 hover:text-brand-500 transition-colors text-lg" onclick="playSound('click')"><i class="fab fa-github"></i></a>
+            <a href="https://vsos.itch.io" target="_blank" class="text-gray-300 hover:text-brand-500 transition-colors text-lg" onclick="playSound('click')"><i class="fab fa-itch-io"></i></a>
+        </div>
+
+        <!-- Audio controls + Admin quick shortcut -->
+        <div class="flex items-center space-x-4">
+            <button id="bg-music-toggle" class="p-2.5 rounded-full glassmorphism-light hover:bg-brand-500/20 text-gray-300 hover:text-brand-500 transition-all duration-300" onclick="toggleMusic()" title="Toggle ambient background music">
+                <i id="music-icon" class="fas fa-volume-mute"></i>
+            </button>
+            <button class="md:hidden p-2.5 rounded-full glassmorphism-light hover:bg-brand-500/20 text-gray-300" onclick="toggleMobileMenu()" title="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full glassmorphism p-6 flex flex-col space-y-4 border-b border-brand-500/20 md:hidden animate-fade-in">
+            <a href="#about" class="text-gray-300 hover:text-brand-500 transition-colors py-2 border-b border-white/5 font-medium" onclick="toggleMobileMenu(); playSound('click')">ABOUT</a>
+            <a href="#games" class="text-gray-300 hover:text-brand-500 transition-colors py-2 border-b border-white/5 font-medium" onclick="toggleMobileMenu(); playSound('click')">GAMES</a>
+            <a href="#featured" class="text-gray-300 hover:text-brand-500 transition-colors py-2 border-b border-white/5 font-medium" onclick="toggleMobileMenu(); playSound('click')">FEATURED</a>
+            <div class="flex space-x-6 pt-4">
+                <a href="https://github.com/saadellabban164-ui" target="_blank" class="text-gray-300 hover:text-brand-500 transition-colors text-xl" onclick="playSound('click')"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://vsos.itch.io" target="_blank" class="text-gray-300 hover:text-brand-500 transition-colors text-xl" onclick="playSound('click')"><i class="fab fa-itch-io"></i> Itch.io</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dynamic Container -->
+    <main id="main-content" class="flex-grow pt-24 pb-12">
+        
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+            <!-- Decorative Glow Background Effects -->
+            <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[80vw] h-[300px] bg-brand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="relative w-full rounded-2xl overflow-hidden glassmorphism shadow-2xl border border-brand-500/20 mb-8">
+                <!-- Large full-width banner -->
+                <div class="h-64 sm:h-96 md:h-[450px] relative overflow-hidden flex items-center justify-center">
+                    <img src="https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png" alt="VSOS Banner" class="w-full h-full object-cover pulse-banner filter brightness-[0.7] contrast-[1.05]" onerror="this.src='https://via.placeholder.com/1200x500/1b163e/ffffff?text=VSOS'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent"></div>
+                </div>
+
+                <!-- Studio Brand Overlay Content -->
+                <div class="px-6 pb-12 -mt-24 sm:-mt-32 md:-mt-40 relative z-10 flex flex-col items-center text-center">
+                    <div class="relative mb-6">
+                        <div class="absolute -inset-1.5 bg-brand-500/50 rounded-2xl blur-lg animate-pulse"></div>
+                        <img src="https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png" alt="VSOS Logo Logo" class="h-28 w-28 sm:h-36 sm:w-36 rounded-2xl border-2 border-brand-500 relative z-10 shadow-neon-glow" onerror="this.src='https://via.placeholder.com/300'">
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl font-bold tracking-widest text-glow mb-4 bg-gradient-to-b from-white via-white to-brand-500 bg-clip-text text-transparent">VSOS</h1>
+                    <p class="max-w-2xl text-base sm:text-lg text-gray-300 mb-8 leading-relaxed">
+                        VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.
+                    </p>
+
+                    <!-- Links buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md px-4">
+                        <a href="https://github.com/saadellabban164-ui" target="_blank" class="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold transition-all duration-300 shadow-lg" onclick="playSound('click')">
+                            <i class="fab fa-github text-xl"></i> GitHub
+                        </a>
+                        <a href="https://vsos.itch.io" target="_blank" class="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold transition-all duration-300 shadow-neon-glow hover:shadow-neon-glow-strong" onclick="playSound('click')">
+                            <i class="fab fa-itch-io text-xl"></i> Itch.io
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT SECTION ================= -->
+        <section id="about" class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="h-1 w-8 bg-brand-500"></div>
+                        <span class="text-brand-500 font-bold tracking-widest uppercase text-sm">DEVELOPER PROFILE</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Creating Immersive & Reactive Digital Worlds</h2>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        Welcome to VSOS. I build browser-native arcade environments and lightweight, mechanics-focused game iterations that push standard rendering strategies to the limit. Each project represents a playground of mathematical movement, responsive gameplay triggers, and intuitive UX flow.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        Through micro-games and persistent cloud storage modules, my target is to offer plug-and-play game systems directly accessible by anyone with a web browser. No downloads, no installs. Just pure action.
+                    </p>
+
+                    <!-- Animated Statistics -->
+                    <div class="grid grid-cols-3 gap-4 pt-4">
+                        <div class="glassmorphism p-5 rounded-xl border border-brand-500/10 text-center">
+                            <span id="stat-views" class="block text-3xl font-extrabold text-brand-500 text-glow">0</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-widest font-semibold">Studio Visits</span>
+                        </div>
+                        <div class="glassmorphism p-5 rounded-xl border border-brand-500/10 text-center">
+                            <span id="stat-games" class="block text-3xl font-extrabold text-brand-500 text-glow">0</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-widest font-semibold">Total Games</span>
+                        </div>
+                        <div class="glassmorphism p-5 rounded-xl border border-brand-500/10 text-center">
+                            <span id="stat-featured" class="block text-3xl font-extrabold text-brand-500 text-glow">0</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-widest font-semibold">Featured Projects</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative">
+                    <!-- Modern Tech Spec Stack Visual -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-brand-600 to-purple-500 rounded-2xl blur-xl opacity-30"></div>
+                    <div class="relative glassmorphism p-8 rounded-2xl border border-brand-500/20 space-y-6">
+                        <h3 class="text-xl font-bold border-b border-white/10 pb-4 text-brand-400">ENGINE PROTOCOLS</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-center space-x-3 text-sm text-gray-300">
+                                <i class="fas fa-microchip text-brand-500 w-5"></i>
+                                <span>HTML5 Canvas & Vanilla JS Engine Renders</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-sm text-gray-300">
+                                <i class="fas fa-bolt text-brand-500 w-5"></i>
+                                <span>Tailwind CSS Adaptive Styling Systems</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-sm text-gray-300">
+                                <i class="fas fa-database text-brand-500 w-5"></i>
+                                <span>Realtime Sync via Firebase Cloud Ecosystem</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-sm text-gray-300">
+                                <i class="fas fa-gamepad text-brand-500 w-5"></i>
+                                <span>Gamepad & Touch Layout Mechanics integrated</span>
+                            </li>
+                        </ul>
+
+                        <!-- Web Traffic Counter Showcase badge -->
+                        <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
+                            <span>ONLINE PERSISTENCY:</span>
+                            <span class="flex items-center gap-1.5 text-emerald-400 font-bold">
+                                <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span> ACTIVE LIVE
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= GAMES CATALOGUE SECTION ================= -->
+        <section id="games" class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-24">
+            
+            <!-- Search & Filtering Hub Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="h-1 w-8 bg-brand-500"></div>
+                        <span class="text-brand-500 font-bold tracking-widest uppercase text-sm">GAMES STATION</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Active Arcade Catalog</h2>
+                </div>
+
+                <!-- Instant Search System -->
+                <div class="w-full md:w-96 relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="game-search-input" placeholder="Search by title, tag, or technology..." class="w-full py-3 pl-11 pr-4 rounded-xl glassmorphism-input text-sm" oninput="debouncedSearch()" autocomplete="off">
+                    <button id="clear-search-btn" class="hidden absolute inset-y-0 right-0 flex items-center pr-3.5 text-gray-400 hover:text-white" onclick="clearSearch()">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Tag Fast-Filters list -->
+            <div id="fast-filters-list" class="flex flex-wrap gap-2 mb-8">
+                <!-- Loaded dynamically -->
+            </div>
+
+            <!-- Live Games Grid -->
+            <div id="games-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamic Card Elements are outputted here -->
+                <div class="col-span-full py-20 flex flex-col items-center justify-center text-center text-gray-400">
+                    <div class="animate-spin text-3xl text-brand-500 mb-4"><i class="fas fa-spinner"></i></div>
+                    <p class="font-medium">Connecting to VSOS arcade pipeline...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FEATURED GAME SECTION ================= -->
+        <section id="featured" class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-24">
+            <div class="flex items-center space-x-3 mb-10">
+                <div class="h-1 w-8 bg-brand-500"></div>
+                <span class="text-brand-500 font-bold tracking-widest uppercase text-sm">SPOTLIGHT HIGHLIGHT</span>
+            </div>
+
+            <div id="featured-game-dynamic-wrapper">
+                <!-- Populated dynamically via JS. If no featured, template is loaded fallback -->
+                <div class="glassmorphism rounded-2xl overflow-hidden border border-brand-500/20 p-6 md:p-10 flex flex-col lg:flex-row gap-10 items-center">
+                    <div class="w-full lg:w-1/2">
+                        <div class="animate-pulse bg-white/5 rounded-xl h-64 md:h-80"></div>
+                    </div>
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <div class="h-4 bg-white/5 rounded w-1/4 animate-pulse"></div>
+                        <div class="h-8 bg-white/5 rounded w-3/4 animate-pulse"></div>
+                        <div class="h-20 bg-white/5 rounded w-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ARCHIVE TRAFFIC MONITOR & VISITOR COUNTER ================= -->
+        <section class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <div class="glassmorphism rounded-2xl border border-brand-500/10 p-6 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left relative overflow-hidden">
+                <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-brand-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="space-y-1 relative z-10">
+                    <h3 class="text-lg font-bold text-gray-200">PERSISTENT VISITOR COUNTER</h3>
+                    <p class="text-sm text-gray-400">Total sessions routed through VSOS networks since launch</p>
+                </div>
+                
+                <div class="relative z-10 flex items-center space-x-3 px-6 py-3.5 rounded-xl bg-black/40 border border-brand-500/20 shadow-neon-glow">
+                    <i class="fas fa-eye text-brand-500 text-lg animate-pulse"></i>
+                    <span id="visitor-count" class="text-2xl font-black font-heading text-white tracking-widest">----</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= MODERN FOOTER ================= -->
+    <footer class="glassmorphism border-t border-white/5 py-12 px-6 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-400">
+            <div class="flex items-center space-x-4">
+                <img src="https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png" alt="VSOS Logo" class="h-8 w-8 rounded-lg filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                <p>&copy; 2026 VSOS. Created for reactive, high-speed gaming modules. Built with Vanilla JS & Web technology.</p>
+            </div>
+            
+            <div class="flex space-x-6 text-lg">
+                <a href="https://github.com/saadellabban164-ui" target="_blank" class="hover:text-brand-500 transition-colors" onclick="playSound('click')" title="VSOS GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://vsos.itch.io" target="_blank" class="hover:text-brand-500 transition-colors" onclick="playSound('click')" title="VSOS Itch.io Profile"><i class="fab fa-itch-io"></i></a>
+                <a href="#admin" class="hover:text-brand-500 transition-colors text-xs self-center font-bold tracking-widest border border-white/10 px-2 py-1 rounded" onclick="playSound('click')">ADMIN PORTAL</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= FULLSCREEN PLAY OVERLAY (IFRAME MODAL) ================= -->
+    <div id="play-overlay" class="fixed inset-0 bg-dark-900/95 z-50 flex-col hidden animate-fade-in">
+        <!-- Close overlay / full controls top bar -->
+        <div class="w-full bg-black/80 px-4 md:px-8 py-4 flex items-center justify-between border-b border-brand-500/20">
+            <div class="flex items-center space-x-3">
+                <span id="playing-game-title" class="text-xl font-bold tracking-wide text-brand-400">Loading Module</span>
+                <span id="playing-game-views-badge" class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">
+                    <i class="fas fa-eye text-[10px]"></i> <span id="playing-game-views">0</span> views
+                </span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleOverlayFullscreen()" class="p-2.5 text-gray-400 hover:text-white transition-colors" title="Toggle fullscreen aspect">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <button onclick="closePlayOverlay()" class="p-2.5 bg-red-600/20 hover:bg-red-600 border border-red-600/30 text-white rounded-lg px-4 font-semibold transition-all duration-300" title="Exit application">
+                    <i class="fas fa-times mr-2"></i> CLOSE
+                </button>
+            </div>
+        </div>
+        <!-- Iframe viewport wrapper -->
+        <div class="flex-grow bg-black relative flex items-center justify-center p-2 sm:p-4">
+            <div id="iframe-outer-container" class="w-full max-w-5xl aspect-video rounded-xl overflow-hidden border border-brand-500/30 bg-dark-800 shadow-2xl relative">
+                <!-- Loader screen -->
+                <div id="iframe-loader" class="absolute inset-0 bg-dark-800 flex flex-col items-center justify-center text-center space-y-4">
+                    <div class="animate-spin text-4xl text-brand-500"><i class="fas fa-circle-notch"></i></div>
+                    <p class="text-sm font-semibold tracking-wide text-gray-300">ESTABLISHING ARCADE PIPE LINK</p>
+                </div>
+                <iframe id="game-iframe" src="" class="w-full h-full border-0" allow="autoplay; gamepad; keyboard; fullscreen" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= AMBIENT & FX AUDIO MODULES ================= -->
+    <audio id="audio-click" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" type="audio/wav">
+    </audio>
+
+
+    <!-- ======================================================= -->
+    <!--                  HIDDEN ADMIN DASHBOARD                 -->
+    <!-- ======================================================= -->
+    <div id="admin-panel" class="hidden fixed inset-0 z-50 bg-dark-900 overflow-y-auto p-4 sm:p-8 animate-fade-in">
+        
+        <!-- Login Form Screen -->
+        <div id="admin-login-screen" class="max-w-md mx-auto my-12 glassmorphism rounded-2xl border border-brand-500/30 p-8 space-y-6">
+            <div class="text-center space-y-2">
+                <img src="https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png" alt="VSOS Logo" class="h-16 w-16 mx-auto rounded-xl">
+                <h2 class="text-2xl font-bold tracking-widest text-glow">VSOS TERMINAL</h2>
+                <p class="text-xs text-gray-400">Enter authorization credential sequence</p>
+            </div>
+            
+            <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div class="space-y-1.5">
+                    <label for="admin-password" class="text-xs text-gray-400 font-bold uppercase tracking-wider">Access Secret Key</label>
+                    <input type="password" id="admin-password" placeholder="••••••••••••••" class="w-full py-3 px-4 rounded-xl glassmorphism-input" required>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 font-bold tracking-wider uppercase shadow-neon-glow hover:shadow-neon-glow-strong transition-all duration-300">
+                    AUTHORIZE CONNECTION
+                </button>
+            </form>
+
+            <!-- Status message container -->
+            <div id="login-error-msg" class="text-sm text-red-400 text-center font-semibold hidden">
+                Verification credentials rejected
+            </div>
+
+            <div class="text-center pt-2">
+                <button onclick="closeAdminPortal()" class="text-xs text-gray-400 hover:text-brand-400 underline tracking-wider">
+                    Return to Arcade
+                </button>
+            </div>
+        </div>
+
+        <!-- Authorized Dashboard Workspace -->
+        <div id="admin-dashboard-workspace" class="hidden max-w-7xl mx-auto space-y-8">
+            
+            <!-- Dashboard Nav Header -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-6">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-wider text-glow">VSOS SYSTEM CONTROL</h1>
+                    </div>
+                    <p class="text-xs text-gray-400">Terminal connection active. Realtime engine stream operational.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="exportGamesJSON()" class="px-4 py-2 text-xs rounded-lg glassmorphism-light hover:bg-brand-500/10 text-brand-300 border border-brand-500/20 font-bold uppercase">
+                        <i class="fas fa-file-export mr-1.5"></i> Export JSON
+                    </button>
+                    <label class="px-4 py-2 text-xs rounded-lg glassmorphism-light hover:bg-brand-500/10 text-brand-300 border border-brand-500/20 font-bold uppercase cursor-pointer">
+                        <i class="fas fa-file-import mr-1.5"></i> Import JSON
+                        <input type="file" id="import-json-file" class="hidden" accept=".json" onchange="importGamesJSON(event)">
+                    </label>
+                    <button onclick="handleAdminLogout()" class="px-4 py-2 text-xs bg-red-600/20 hover:bg-red-600 border border-red-600/30 text-white rounded-lg font-bold uppercase transition-colors">
+                        <i class="fas fa-sign-out-alt mr-1.5"></i> Terminate Session
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom Notice Alert for restricted operations or permissions limits -->
+            <div id="restricted-notice" class="hidden glassmorphism border-amber-500/30 p-4 rounded-xl flex items-start gap-3 bg-amber-500/5">
+                <i class="fas fa-exclamation-circle text-amber-500 text-lg mt-0.5"></i>
+                <div class="text-xs space-y-1">
+                    <p class="font-bold text-amber-400">SINGLE-SESSION IN-MEMORY STORAGE ENGAGED</p>
+                    <p class="text-gray-300 leading-relaxed">
+                        The application has securely transitioned to a standalone Single-Session Mode to resolve Firestore database write restrictions or missing authentication tokens. You can fully add, edit, feature, and test game profiles on this browser tab cleanly! To enable global cloud updates, please activate <span class="font-semibold text-white">Anonymous Auth</span> in your <span class="font-semibold text-white">Firebase Console &gt; Authentication</span> panel.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Stats KPI Cards Row -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="glassmorphism p-6 rounded-2xl border border-brand-500/10">
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mb-2 font-bold">Total Platform Views</div>
+                    <div id="dash-total-views" class="text-3xl font-black text-brand-400 text-glow">----</div>
+                </div>
+                <div class="glassmorphism p-6 rounded-2xl border border-brand-500/10">
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mb-2 font-bold">Total Games Cataloged</div>
+                    <div id="dash-total-games" class="text-3xl font-black text-brand-400 text-glow">----</div>
+                </div>
+                <div class="glassmorphism p-6 rounded-2xl border border-brand-500/10">
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mb-2 font-bold">Featured Game</div>
+                    <div id="dash-featured-title" class="text-sm font-bold text-gray-200 truncate mt-1">None Selected</div>
+                </div>
+                <div class="glassmorphism p-6 rounded-2xl border border-brand-500/10">
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mb-2 font-bold">Firebase Link Status</div>
+                    <div id="dash-firebase-status" class="text-sm font-bold text-emerald-400 mt-1 flex items-center gap-1.5">
+                        <i class="fas fa-check-circle"></i> Connected
+                    </div>
+                </div>
+            </div>
+
+            <!-- Double-Column Setup: Game Form & Manage list -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Form Section: Add / Edit Game -->
+                <div class="lg:col-span-5 glassmorphism p-6 rounded-2xl border border-brand-500/20 space-y-6">
+                    <div class="border-b border-white/10 pb-4">
+                        <h3 id="form-action-title" class="text-lg font-extrabold tracking-wide">ADD NEW ARCADE MODULE</h3>
+                        <p class="text-xs text-gray-400">Complete specifications to instantly push module to catalog</p>
+                    </div>
+
+                    <form id="game-editor-form" onsubmit="handleGameFormSubmit(event)" class="space-y-4">
+                        <!-- Hidden state for updates -->
+                        <input type="hidden" id="edit-game-id" value="">
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Game Title</label>
+                            <input type="text" id="game-title" placeholder="e.g. Neon Runner 2055" class="w-full py-2.5 px-4 rounded-xl glassmorphism-input text-sm" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Description</label>
+                            <textarea id="game-description" placeholder="A brief hook detailing game mechanics, systems..." rows="3" class="w-full py-2.5 px-4 rounded-xl glassmorphism-input text-sm" required></textarea>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Thumbnail Image URL (e.g. ImgBB / direct link)</label>
+                            <input type="url" id="game-thumbnail" placeholder="https://ibb.co/qYf24FKn or direct image url" class="w-full py-2.5 px-4 rounded-xl glassmorphism-input text-sm" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Tags (Comma Separated)</label>
+                            <input type="text" id="game-tags" placeholder="Action, WebGL, Highscore, 2D" class="w-full py-2.5 px-4 rounded-xl glassmorphism-input text-sm" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Game Embed URL (Iframe Source)</label>
+                            <input type="text" id="game-embed" placeholder="https://html.itch.zone/html/.../index.html" class="w-full py-2.5 px-4 rounded-xl glassmorphism-input text-sm" required>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Custom Action Link URL</label>
+                                <input type="url" id="game-playUrl" placeholder="https://vsos.itch.io/your-game or Steam / store link" class="w-full py-2.5 px-4 rounded-xl glassmorphism-input text-sm" required>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Custom Action Link Text</label>
+                                <input type="text" id="game-linkText" placeholder="e.g. Visit Store, Visit Website" class="w-full py-2.5 px-4 rounded-xl glassmorphism-input text-sm">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 py-2">
+                            <input type="checkbox" id="game-featured" class="w-5 h-5 rounded accent-brand-500 bg-black border-brand-500/20 cursor-pointer">
+                            <label for="game-featured" class="text-sm text-gray-300 font-semibold cursor-pointer select-none">Set as Studio Spotlight / Featured Game</label>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="submit" id="form-submit-btn" class="flex-grow py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold uppercase text-xs tracking-wider transition-all duration-300 shadow-neon-glow">
+                                PUBLISH MODULE
+                            </button>
+                            <button type="button" id="form-cancel-btn" onclick="resetGameForm()" class="hidden px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-bold uppercase text-xs tracking-wider transition-colors">
+                                CANCEL
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Catalog Admin List Section -->
+                <div class="lg:col-span-7 glassmorphism p-6 rounded-2xl border border-brand-500/20 space-y-6">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-4">
+                        <div>
+                            <h3 class="text-lg font-extrabold tracking-wide">ACTIVE MODULE REGISTRY</h3>
+                            <p class="text-xs text-gray-400">Inspect, adjust status flags, or pull items down from network</p>
+                        </div>
+                        <span id="registry-count-badge" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">
+                            0 Entries
+                        </span>
+                    </div>
+
+                    <!-- Simple Internal Search / Filter inside Dashboard -->
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 text-xs">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="dash-game-search" placeholder="Quick find by title..." class="w-full py-2 pl-9 pr-4 rounded-lg glassmorphism-input text-xs" oninput="renderAdminCatalog()">
+                    </div>
+
+                    <!-- Items container table/list -->
+                    <div id="admin-catalog-list" class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                        <!-- Loaded via Javascript -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Consolidated Unified Module Script block ensuring error-free global scoping -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { 
+            getFirestore, 
+            doc, 
+            setDoc, 
+            getDoc, 
+            updateDoc, 
+            increment, 
+            collection, 
+            addDoc, 
+            deleteDoc, 
+            onSnapshot, 
+            query, 
+            orderBy, 
+            getDocs 
+        } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+        import { 
+            getAuth, 
+            signInAnonymously, 
+            signInWithCustomToken,
+            onAuthStateChanged 
+        } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+
+        // Direct Core Configuration Setup - dynamically maps injected Firebase configurations
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "AIzaSyCGDzRqilmypv0i67U7yyyh31mQYXy-C60",
+                authDomain: "vsos-ca4f8.firebaseapp.com",
+                projectId: "vsos-ca4f8",
+                storageBucket: "vsos-ca4f8.firebasestorage.app",
+                messagingSenderId: "757644399773",
+                appId: "1:757644399773:web:bdbdb45f66df35afe3f074",
+                measurementId: "G-L61TECMYC4"
+            };
+
+        // Initialize App Connections
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // App identifier structure matching Rule 1 specifications
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'vsos-app';
+
+        // Local state store
+        window.vsosState = {
+            games: [],
+            analytics: { totalViews: 0 },
+            currentUser: null,
+            activeFilters: [],
+            selectedSearchText: "",
+            isMusicPlaying: false,
+            dbConnected: false,
+            loading: true, // Loading state machine integration
+            useInMemoryFallback: false // Standalone session fallback mode
+        };
+
+        // Native Synthwave Synthesizer state
+        let synthContext = null;
+        let oscillators = [];
+        let filterNode = null;
+        let masterGain = null;
+
+        // Global Action Expose Layer to bypass Web Module context blocks on inline DOM events
+        window.toggleMobileMenu = toggleMobileMenu;
+        window.playSound = playSound;
+        window.toggleMusic = toggleMusic;
+        window.toggleTagFilter = toggleTagFilter;
+        window.debouncedSearch = debouncedSearch;
+        window.clearSearch = clearSearch;
+        window.launchGame = launchGame;
+        window.closePlayOverlay = closePlayOverlay;
+        window.toggleOverlayFullscreen = toggleOverlayFullscreen;
+        window.closeAdminPortal = closeAdminPortal;
+        window.handleAdminLogin = handleAdminLogin;
+        window.handleAdminLogout = handleAdminLogout;
+        window.handleGameFormSubmit = handleGameFormSubmit;
+        window.editGame = editGame;
+        window.resetGameForm = resetGameForm;
+        window.deleteGame = deleteGame;
+        window.quickFeatureGame = quickFeatureGame;
+        window.renderAdminCatalog = renderAdminCatalog;
+        window.exportGamesJSON = exportGamesJSON;
+        window.importGamesJSON = importGamesJSON;
+        window.checkHashRoute = checkHashRoute;
+
+        // Helper function to resolve standard ImgBB page viewer URLs to raw direct rendering assets
+        function resolveDirectThumbnailUrl(url) {
+            if (!url) return "";
+            url = url.trim();
+            // Matches viewer page url pattern: ibb.co/abcdefg or ibb.co/abcdefg/name
+            const match = url.match(/(?:https?:\/\/)?ibb\.co\/([a-zA-Z0-9]+)(?:\/([a-zA-Z0-9\-_]+))?/i);
+            if (match) {
+                const id = match[1];
+                const filename = match[2] ? match[2] : "image";
+                return `https://i.ibb.co/${id}/${filename}.png`;
+            }
+            return url;
+        }
+
+        // Initialize Authentication sequence securely (Rule 3 compliant)
+        // Set up the listener FIRST, then execute auth sequentially
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                window.vsosState.currentUser = user;
+                window.vsosState.dbConnected = true;
+                
+                // Mount database triggers safely now that the session is officially authenticated
+                try {
+                    await handleVisitorMetrics();
+                    syncArcadeCollections();
+                } catch (err) {
+                    console.error("Failed executing startup analytics sync sequence:", err);
+                    activateInMemoryFallbackMode();
+                }
+            } else {
+                window.vsosState.currentUser = null;
+                window.vsosState.dbConnected = false;
+            }
+        });
+
+        async function authenticateAndSync() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    try {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } catch (tokenError) {
+                        console.warn("Custom Token failed validation, falling back to anonymous authentication.", tokenError);
+                        await tryAnonymousAuth();
+                    }
+                } else {
+                    await tryAnonymousAuth();
+                }
+            } catch (error) {
+                handleAuthFailure(error);
+            }
+        }
+
+        // Dedicated helper to trigger Anonymous Sign-In
+        async function tryAnonymousAuth() {
+            try {
+                await signInAnonymously(auth);
+            } catch (error) {
+                // Catch auth/admin-restricted-operation (anonymous sign-in disabled in console)
+                if (error.code === 'auth/admin-restricted-operation') {
+                    console.warn("Anonymous Authentication is disabled in Firebase console. Engaging diagnostic fallback session...");
+                    activateInMemoryFallbackMode();
+                } else {
+                    throw error;
+                }
+            }
+        }
+
+        // Helper to instantly engage safe in-memory operations to prevent errors
+        function activateInMemoryFallbackMode() {
+            window.vsosState.useInMemoryFallback = true;
+            window.vsosState.loading = false;
+            window.vsosState.dbConnected = false;
+            
+            const restrictNotice = document.getElementById('restricted-notice');
+            if (restrictNotice) restrictNotice.classList.remove('hidden');
+
+            const statusEl = document.getElementById('dash-firebase-status');
+            if (statusEl) {
+                statusEl.innerHTML = `
+                    <span class="text-amber-400 flex items-center gap-1.5" title="Anonymous Auth is disabled in Firebase Console. Please enable it in the authentication tab."><i class="fas fa-exclamation-triangle"></i> Session Fallback</span>
+                `;
+            }
+
+            const visitorCountEl = document.getElementById('visitor-count');
+            if (visitorCountEl && visitorCountEl.textContent === '----') {
+                visitorCountEl.textContent = '1'; // Setup session views fallback
+            }
+
+            const statViewsEl = document.getElementById('stat-views');
+            if (statViewsEl) statViewsEl.textContent = '1';
+
+            const dashTotalViewsEl = document.getElementById('dash-total-views');
+            if (dashTotalViewsEl) dashTotalViewsEl.textContent = '1';
+
+            renderMainCatalogUI();
+            renderFeaturedGameUI();
+            renderAdminCatalog();
+            updateStudioStats();
+        }
+
+        // Generic auth crash protection handler
+        function handleAuthFailure(error) {
+            console.warn("Authentication block detected. Transitioning directly to safe single-session mode:", error);
+            activateInMemoryFallbackMode();
+        }
+
+        // Initialize visitor metrics tracking using correct Rule 1 absolute path
+        async function handleVisitorMetrics() {
+            // Guard every Firestore operation (Rule 3)
+            if (!window.vsosState.currentUser || window.vsosState.useInMemoryFallback) return;
+            
+            const analyticsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'analytics', 'totals');
+            
+            try {
+                // Increment visitor count atomically once per session (Auto-creates analytics document if missing)
+                const sessionKey = 'vsos_session_counted';
+                if (!sessionStorage.getItem(sessionKey)) {
+                    await setDoc(analyticsDocRef, { 
+                        totalViews: increment(1) 
+                    }, { merge: true });
+                    sessionStorage.setItem(sessionKey, 'true');
+                }
+            } catch (err) {
+                console.warn("Analytics permission blocked by security rules. Activating local session counters:", err);
+                activateInMemoryFallbackMode();
+            }
+        }
+
+        // Setup Firestore listeners using non-complex queries (Rule 2 compliant)
+        function syncArcadeCollections() {
+            // Guard every Firestore operation (Rule 3)
+            if (!window.vsosState.currentUser || window.vsosState.useInMemoryFallback) return;
+
+            const gamesRef = collection(db, 'artifacts', appId, 'public', 'data', 'games');
+            const analyticsRef = doc(db, 'artifacts', appId, 'public', 'data', 'analytics', 'totals');
+
+            // 1. Sync live games registry changes
+            onSnapshot(gamesRef, (snapshot) => {
+                const items = [];
+                snapshot.forEach((doc) => {
+                    items.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+
+                // Sort lists on JavaScript thread (Rule 2 - No complex compound order queries)
+                items.sort((a, b) => {
+                    const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                    const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                    return dateB - dateA;
+                });
+
+                window.vsosState.games = items;
+                window.vsosState.loading = false; // Mark loading complete on sync
+                
+                // Re-render display layers
+                renderMainCatalogUI();
+                renderFeaturedGameUI();
+                renderAdminCatalog();
+                updateStudioStats();
+            }, (error) => {
+                console.warn("Games subscription permission restricted. Moving cleanly to standalone single-session logic:", error);
+                activateInMemoryFallbackMode();
+            });
+
+            // 2. Sync live web views stats
+            onSnapshot(analyticsRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    window.vsosState.analytics = snapshot.data();
+                    const liveViews = window.vsosState.analytics.totalViews || 0;
+                    
+                    const visitorCountEl = document.getElementById('visitor-count');
+                    if (visitorCountEl) visitorCountEl.textContent = Number(liveViews).toLocaleString();
+
+                    const dashTotalViewsEl = document.getElementById('dash-total-views');
+                    if (dashTotalViewsEl) dashTotalViewsEl.textContent = Number(liveViews).toLocaleString();
+
+                    const statViewsEl = document.getElementById('stat-views');
+                    if (statViewsEl) statViewsEl.textContent = Number(liveViews).toLocaleString();
+                }
+            }, (error) => {
+                console.warn("Analytics stream read limited or restricted:", error);
+            });
+        }
+
+        // ================= INTERFACE VIEW GENERATION LAYERS =================
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function playSound(type) {
+            if (type === 'click') {
+                const sfx = document.getElementById('audio-click');
+                if (sfx) {
+                    sfx.currentTime = 0;
+                    sfx.volume = 0.3;
+                    sfx.play().catch(() => {});
+                }
+            }
+        }
+
+        // Web Audio Synthesizer Loop Generator
+        // Custom designed to compose warm, meditative, completely safe calm space chill-out music
+        function initSpaceSynth() {
+            synthContext = new (window.AudioContext || window.webkitAudioContext)();
+            masterGain = synthContext.createGain();
+            filterNode = synthContext.createBiquadFilter();
+
+            // Ultra-warm low-pass filter to keep notes smooth, pillowy, and dark
+            filterNode.type = 'lowpass';
+            filterNode.frequency.setValueAtTime(400, synthContext.currentTime);
+            filterNode.Q.setValueAtTime(1.0, synthContext.currentTime);
+
+            // Create delay echo effect loop for deep cosmic reflections
+            const delayNode = synthContext.createDelay(2.0);
+            const delayFeedback = synthContext.createGain();
+            delayNode.delayTime.setValueAtTime(0.6, synthContext.currentTime); // 600ms delay time
+            delayFeedback.gain.setValueAtTime(0.4, synthContext.currentTime); // 40% feedback gain volume
+
+            delayNode.connect(delayFeedback);
+            delayFeedback.connect(delayNode);
+
+            masterGain.gain.setValueAtTime(0, synthContext.currentTime);
+
+            // Warm shifting drone chord notes (C2, C3, G3, E4)
+            const droneFreqs = [65.41, 130.81, 196.00, 329.63];
+            droneFreqs.forEach((freq, idx) => {
+                const osc = synthContext.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, synthContext.currentTime);
+                osc.detune.setValueAtTime((idx - 2) * 5, synthContext.currentTime);
+
+                const oscGain = synthContext.createGain();
+                // Bumped voice volume slightly (from 0.04/0.015 to 0.06/0.025)
+                oscGain.gain.setValueAtTime(idx === 0 ? 0.06 : 0.025, synthContext.currentTime);
+
+                // Setup individual slow-sweeping breathing LFO modulator to swell the voice in and out
+                const lfo = synthContext.createOscillator();
+                const lfoGain = synthContext.createGain();
+                lfo.frequency.setValueAtTime(0.03 + idx * 0.01, synthContext.currentTime);
+                lfoGain.gain.setValueAtTime(idx === 0 ? 0.015 : 0.008, synthContext.currentTime);
+
+                lfo.connect(lfoGain);
+                lfoGain.connect(oscGain.gain);
+
+                lfo.start();
+                osc.connect(oscGain);
+                oscGain.connect(filterNode);
+
+                oscillators.push(osc);
+                oscillators.push(lfo); // store to stop properly
+            });
+
+            // Connect routing pathways
+            filterNode.connect(masterGain);
+            filterNode.connect(delayNode);
+            delayNode.connect(masterGain);
+            masterGain.connect(synthContext.destination);
+
+            // Beautiful pentatonic scale melody note list (C4, D4, E4, G4, A4, C5, D5, E5, G5)
+            const melodyScale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
+
+            // Generative Melody Sequencer Interval
+            window.melodyTimer = setInterval(() => {
+                if (!window.vsosState.isMusicPlaying || !synthContext) return;
+                
+                // 60% chance to play a note for a beautiful, atmospheric, non-crowded sequence
+                if (Math.random() > 0.4) {
+                    const randomFreq = melodyScale[Math.floor(Math.random() * melodyScale.length)];
+                    playGenerativeNote(randomFreq);
+                }
+            }, 1200);
+        }
+
+        // Generates notes procedurally with a soft analog synthesizer envelope
+        function playGenerativeNote(freq) {
+            if (!synthContext || !filterNode) return;
+            const now = synthContext.currentTime;
+            const osc = synthContext.createOscillator();
+            const noteGain = synthContext.createGain();
+
+            // Randomize voice model slightly between Sine and Triangle for a warm lofi color
+            osc.type = Math.random() > 0.5 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(freq, now);
+
+            // Attack-Decay-Release Envelope
+            noteGain.gain.setValueAtTime(0, now);
+            noteGain.gain.linearRampToValueAtTime(0.06, now + 0.15); // Slightly raised attack (from 0.04 to 0.06)
+            noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8); // Gentle exponential fade out
+
+            osc.connect(noteGain);
+            noteGain.connect(filterNode); // route to main lowpass filter and echo delay track
+
+            osc.start(now);
+            osc.stop(now + 4.0);
+        }
+
+        function toggleMusic() {
+            playSound('click');
+            const icon = document.getElementById('music-icon');
+            
+            if (window.vsosState.isMusicPlaying) {
+                // Fade out smoothly
+                if (masterGain && synthContext) {
+                    masterGain.gain.setValueAtTime(masterGain.gain.value, synthContext.currentTime);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, synthContext.currentTime + 1.2);
+                }
+                if (icon) icon.className = 'fas fa-volume-mute';
+                window.vsosState.isMusicPlaying = false;
+            } else {
+                // Initialize synthesizer on first user interaction
+                if (!synthContext) {
+                    initSpaceSynth();
+                }
+                
+                // Resume Context if suspended by strict browser policies
+                if (synthContext.state === 'suspended') {
+                    synthContext.resume();
+                }
+
+                // Fade in smoothly to avoid pops
+                masterGain.gain.setValueAtTime(0.0001, synthContext.currentTime);
+                // Boosted master target volume from 0.18 to 0.35 for a better higher volume presence
+                masterGain.gain.exponentialRampToValueAtTime(0.35, synthContext.currentTime + 1.5);
+
+                if (icon) icon.className = 'fas fa-volume-up text-brand-400 text-glow animate-pulse';
+                window.vsosState.isMusicPlaying = true;
+            }
+        }
+
+        function renderMainCatalogUI() {
+            const container = document.getElementById('games-grid-container');
+            if (!container) return;
+
+            // Handle UI loading state
+            if (window.vsosState.loading) {
+                container.innerHTML = `
+                    <div class="col-span-full py-20 flex flex-col items-center justify-center text-center text-gray-400">
+                        <div class="animate-spin text-3xl text-brand-500 mb-4"><i class="fas fa-spinner"></i></div>
+                        <p class="font-medium text-sm tracking-wider uppercase text-gray-300">Synchronizing with VSOS Pipeline...</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const searchVal = window.vsosState.selectedSearchText.toLowerCase().trim();
+            const activeFilters = window.vsosState.activeFilters;
+
+            buildDynamicTagFilters();
+
+            const filtered = window.vsosState.games.filter(game => {
+                const matchSearch = !searchVal || 
+                    game.title.toLowerCase().includes(searchVal) || 
+                    game.description.toLowerCase().includes(searchVal) || 
+                    (game.tags && game.tags.toLowerCase().includes(searchVal));
+
+                const matchFilters = activeFilters.length === 0 || 
+                    (game.tags && activeFilters.every(fTag => 
+                        game.tags.split(',').map(t => t.trim().toLowerCase()).includes(fTag.toLowerCase())
+                    ));
+
+                return matchSearch && matchFilters;
+            });
+
+            // Clean Empty State Screen to avoid adding fake games ("Don't add games from your brain")
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-20 text-center text-gray-400 glassmorphism rounded-3xl border border-brand-500/10 p-10 max-w-2xl mx-auto space-y-4">
+                        <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-2xl">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white tracking-wide">Arcade Station is Empty</h3>
+                        <p class="text-sm text-gray-400">
+                            No active game modules are loaded in the database yet. Admin operators can deploy and manage games live using our administrative panel.
+                        </p>
+                        <div class="pt-2">
+                            <a href="#admin" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold uppercase text-xs tracking-wider shadow-neon-glow transition-all duration-300">
+                                <i class="fas fa-lock"></i> Go to Admin Portal
+                            </a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(game => {
+                const tagList = game.tags ? game.tags.split(',').map(t => t.trim()) : [];
+                const formattedDate = game.createdAt ? new Date(game.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'Alpha Build';
+                const customLinkText = game.linkText ? game.linkText.trim() : "Launch Store";
+
+                return `
+                    <div class="glassmorphism rounded-2xl overflow-hidden border border-brand-500/15 hover:border-brand-500/40 transition-all duration-300 flex flex-col group hover:shadow-neon-glow hover:-translate-y-1 animate-fade-in">
+                        <div class="relative aspect-video overflow-hidden bg-dark-800">
+                            <img src="${escapeHtml(game.thumbnail)}" alt="${escapeHtml(game.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x350/1b163e/ffffff?text=${encodeURIComponent(game.title)}'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent"></div>
+                            
+                            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+                                ${game.featured ? `<span class="bg-brand-600 text-white text-[10px] font-black uppercase px-2 py-0.5 rounded shadow-neon-glow">Spotlight</span>` : ''}
+                            </div>
+                            
+                            <div class="absolute bottom-3 right-3 text-xs text-gray-300 font-semibold flex items-center gap-1">
+                                <i class="fas fa-eye text-brand-400"></i> ${game.views || 0}
+                            </div>
+                        </div>
+
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <div class="space-y-2">
+                                <div class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">${formattedDate}</div>
+                                <h3 class="text-xl font-bold tracking-wide text-white group-hover:text-brand-400 transition-colors">${escapeHtml(game.title)}</h3>
+                                <p class="text-sm text-gray-400 line-clamp-3 leading-relaxed">${escapeHtml(game.description)}</p>
+                            </div>
+
+                            <div class="space-y-4 pt-2">
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${tagList.map(tag => `<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-400">${escapeHtml(tag)}</span>`).join('')}
+                                </div>
+
+                                <div class="flex gap-2.5 pt-1">
+                                    <button onclick="launchGame('${escapeHtml(game.id)}')" class="flex-grow flex items-center justify-center gap-1.5 py-2 px-4 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold uppercase transition-colors">
+                                        <i class="fas fa-play text-[10px]"></i> Launch Play
+                                    </button>
+                                    <a href="${escapeHtml(game.playUrl)}" target="_blank" class="px-3.5 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 hover:text-white transition-colors flex items-center justify-center gap-1 text-xs font-bold uppercase" title="${escapeHtml(customLinkText)}">
+                                        <i class="fas fa-external-link-alt text-[10px] mr-0.5"></i> ${escapeHtml(customLinkText)}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function buildDynamicTagFilters() {
+            const filterContainer = document.getElementById('fast-filters-list');
+            if (!filterContainer) return;
+
+            const allTags = new Set();
+            window.vsosState.games.forEach(game => {
+                if (game.tags) {
+                    game.tags.split(',').forEach(tag => {
+                        const cleanTag = tag.trim();
+                        if (cleanTag) allTags.add(cleanTag);
+                    });
+                }
+            });
+
+            if (allTags.size === 0) {
+                filterContainer.innerHTML = '';
+                return;
+            }
+
+            let html = `<button onclick="toggleTagFilter('')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-all duration-300 ${window.vsosState.activeFilters.length === 0 ? 'bg-brand-600 text-white shadow-neon-glow' : 'glassmorphism-light text-gray-400 hover:text-white border border-white/5'}">ALL PACKAGES</button>`;
+            
+            allTags.forEach(tag => {
+                const isActive = window.vsosState.activeFilters.includes(tag);
+                html += `
+                    <button onclick="toggleTagFilter('${escapeHtml(tag)}')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-all duration-300 ${isActive ? 'bg-brand-600 text-white shadow-neon-glow' : 'glassmorphism-light text-gray-400 hover:text-white border border-white/5'}">
+                        ${escapeHtml(tag)}
+                    </button>
+                `;
+            });
+
+            filterContainer.innerHTML = html;
+        }
+
+        function toggleTagFilter(tag) {
+            playSound('click');
+            if (!tag) {
+                window.vsosState.activeFilters = [];
+            } else {
+                const index = window.vsosState.activeFilters.indexOf(tag);
+                if (index > -1) {
+                    window.vsosState.activeFilters.splice(index, 1);
+                } else {
+                    window.vsosState.activeFilters.push(tag);
+                }
+            }
+            renderMainCatalogUI();
+        }
+
+        let searchTimeoutToken = null;
+        function debouncedSearch() {
+            clearTimeout(searchTimeoutToken);
+            searchTimeoutToken = setTimeout(() => {
+                const input = document.getElementById('game-search-input');
+                const clearBtn = document.getElementById('clear-search-btn');
+                if (!input) return;
+                
+                window.vsosState.selectedSearchText = input.value;
+                
+                if (input.value) {
+                    if (clearBtn) clearBtn.classList.remove('hidden');
+                } else {
+                    if (clearBtn) clearBtn.classList.add('hidden');
+                }
+                
+                renderMainCatalogUI();
+            }, 300);
+        }
+
+        function clearSearch() {
+            playSound('click');
+            const input = document.getElementById('game-search-input');
+            if (input) input.value = "";
+            window.vsosState.selectedSearchText = "";
+            const clearBtn = document.getElementById('clear-search-btn');
+            if (clearBtn) clearBtn.classList.add('hidden');
+            renderMainCatalogUI();
+        }
+
+        function renderFeaturedGameUI() {
+            const wrapper = document.getElementById('featured-game-dynamic-wrapper');
+            if (!wrapper) return;
+
+            // Handle UI Loading Skeleton Animation
+            if (window.vsosState.loading) {
+                wrapper.innerHTML = `
+                    <div class="glassmorphism rounded-3xl overflow-hidden border border-brand-500/20 p-6 md:p-10 flex flex-col lg:flex-row gap-10 items-center">
+                        <div class="w-full lg:w-1/2">
+                            <div class="animate-pulse bg-white/5 rounded-xl h-64 md:h-80"></div>
+                        </div>
+                        <div class="w-full lg:w-1/2 space-y-6">
+                            <div class="h-4 bg-white/5 rounded w-1/4 animate-pulse"></div>
+                            <div class="h-8 bg-white/5 rounded w-3/4 animate-pulse"></div>
+                            <div class="h-20 bg-white/5 rounded w-full animate-pulse"></div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            let featuredItem = window.vsosState.games.find(g => g.featured);
+            if (!featuredItem && window.vsosState.games.length > 0) {
+                featuredItem = window.vsosState.games[0];
+            }
+
+            if (!featuredItem) {
+                wrapper.innerHTML = `
+                    <div class="glassmorphism rounded-3xl border border-brand-500/10 p-12 text-center text-gray-400 max-w-2xl mx-auto space-y-4">
+                        <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-2xl">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">No Spotlight Highlights Available</h3>
+                        <p class="text-xs text-gray-500">Access the admin control center with /#admin to select and spotlight a featured game module.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const titleKpi = document.getElementById('dash-featured-title');
+            if (titleKpi) {
+                titleKpi.textContent = featuredItem.title;
+            }
+
+            const tagList = featuredItem.tags ? featuredItem.tags.split(',').map(t => t.trim()) : [];
+            const customLinkText = featuredItem.linkText ? featuredItem.linkText.trim() : "Visit Store";
+
+            wrapper.innerHTML = `
+                <div class="glassmorphism rounded-3xl overflow-hidden border border-brand-500/25 p-6 lg:p-12 flex flex-col lg:flex-row gap-10 items-center hover:border-brand-500/40 transition-all duration-500 animate-fade-in">
+                    <div class="w-full lg:w-1/2 aspect-video rounded-2xl overflow-hidden relative group bg-dark-800 border border-white/5 shadow-2xl">
+                        <img src="${escapeHtml(featuredItem.thumbnail)}" alt="Featured Game Artwork" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x450/1b163e/ffffff?text=${encodeURIComponent(featuredItem.title)}'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900/60 to-transparent"></div>
+                    </div>
+
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <div class="space-y-3">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 text-xs font-bold uppercase tracking-widest text-glow">
+                                <i class="fas fa-star text-[10px] animate-pulse"></i> Spotlight Highlights
+                            </div>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">${escapeHtml(featuredItem.title)}</h3>
+                        </div>
+
+                        <p class="text-gray-300 leading-relaxed text-base sm:text-lg">${escapeHtml(featuredItem.description)}</p>
+
+                        <div class="flex flex-wrap gap-2">
+                            ${tagList.map(tag => `<span class="text-xs px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-300 font-medium">${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-white/5">
+                            <button onclick="launchGame('${escapeHtml(featuredItem.id)}')" class="flex-grow sm:flex-initial flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold uppercase text-sm tracking-wider transition-all duration-300 shadow-neon-glow hover:shadow-neon-glow-strong">
+                                <i class="fas fa-play text-xs"></i> Play Instantly
+                            </button>
+                            <a href="${escapeHtml(featuredItem.playUrl)}" target="_blank" class="flex-grow sm:flex-initial flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 font-bold uppercase text-xs tracking-wider transition-colors">
+                                <i class="fas fa-external-link-alt text-base mr-1.5"></i> ${escapeHtml(customLinkText)}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateStudioStats() {
+            const statGames = document.getElementById('stat-games');
+            if (statGames) statGames.textContent = window.vsosState.games.length;
+            
+            const countBadge = document.getElementById('registry-count-badge');
+            if (countBadge) {
+                countBadge.textContent = `${window.vsosState.games.length} Entries`;
+            }
+            const dashCountKpi = document.getElementById('dash-total-games');
+            if (dashCountKpi) {
+                dashCountKpi.textContent = window.vsosState.games.length;
+            }
+
+            const featuredItem = window.vsosState.games.find(g => g.featured);
+            const statFeatured = document.getElementById('stat-featured');
+            if (statFeatured) statFeatured.textContent = featuredItem ? 1 : 0;
+        }
+
+        function launchGame(gameId) {
+            playSound('click');
+            const game = window.vsosState.games.find(g => g.id === gameId);
+            if (!game) return;
+
+            const overlay = document.getElementById('play-overlay');
+            const iframe = document.getElementById('game-iframe');
+            const loader = document.getElementById('iframe-loader');
+            const titleElem = document.getElementById('playing-game-title');
+            const viewsElem = document.getElementById('playing-game-views');
+            const viewsBadge = document.getElementById('playing-game-views-badge');
+
+            if (titleElem) titleElem.textContent = game.title;
+            if (viewsElem) viewsElem.textContent = game.views || 0;
+            if (viewsBadge) viewsBadge.classList.remove('hidden');
+
+            if (overlay) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+            }
+            
+            if (loader) loader.classList.remove('hidden');
+            
+            let embedUrl = game.embed.trim();
+            if (embedUrl.includes('<iframe')) {
+                const match = embedUrl.match(/src="([^"]+)"/);
+                if (match && match[1]) {
+                    embedUrl = match[1];
+                }
+            }
+
+            if (iframe) {
+                iframe.src = embedUrl;
+                iframe.onload = () => {
+                    if (loader) loader.classList.add('hidden');
+                };
+            }
+
+            incrementGameViews(gameId);
+        }
+
+        async function incrementGameViews(gameId) {
+            const game = window.vsosState.games.find(g => g.id === gameId);
+            if (game) {
+                game.views = (game.views || 0) + 1;
+                renderMainCatalogUI();
+                renderFeaturedGameUI();
+                renderAdminCatalog();
+            }
+
+            if (!window.vsosState.currentUser || window.vsosState.useInMemoryFallback) return;
+            
+            const gameRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', gameId);
+            try {
+                await updateDoc(gameRef, {
+                    views: increment(1)
+                });
+            } catch (err) {
+                console.warn("Unable to write direct views increment to cloud. In-Memory counter engaged instead.");
+            }
+        }
+
+        function closePlayOverlay() {
+            playSound('click');
+            const overlay = document.getElementById('play-overlay');
+            const iframe = document.getElementById('game-iframe');
+            
+            if (overlay) {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            }
+            if (iframe) iframe.src = "";
+        }
+
+        // ================= ADMIN CONSOLE PANEL CONTROL HANDLERS =================
+
+        function closeAdminPortal() {
+            playSound('click');
+            window.location.hash = '';
+        }
+
+        // Check if Admin session previously verified
+        function showLoginScreen() {
+            const loginScreen = document.getElementById('admin-login-screen');
+            if (loginScreen) loginScreen.classList.remove('hidden');
+            const workspace = document.getElementById('admin-dashboard-workspace');
+            if (workspace) workspace.classList.add('hidden');
+            const errorMsg = document.getElementById('login-error-msg');
+            if (errorMsg) errorMsg.classList.add('hidden');
+        }
+
+        function showDashboardWorkspace() {
+            const loginScreen = document.getElementById('admin-login-screen');
+            if (loginScreen) loginScreen.classList.add('hidden');
+            const workspace = document.getElementById('admin-dashboard-workspace');
+            if (workspace) workspace.classList.remove('hidden');
+            renderAdminCatalog();
+        }
+
+        // Secure Login verification using Base64 verification (Sets the secret password to "S.D.N" exactly)
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            playSound('click');
+            
+            const keyInput = document.getElementById('admin-password');
+            const errorElem = document.getElementById('login-error-msg');
+            
+            if (keyInput) {
+                const typedPassword = keyInput.value.trim();
+                
+                // Base64 configuration representing "S.D.N"
+                const encodedObfuscation = "Uy5ELk4=";
+                const derivedEncoding = btoa(typedPassword);
+                
+                if (derivedEncoding === encodedObfuscation) {
+                    sessionStorage.setItem('vsos_admin_authenticated', 'true');
+                    keyInput.value = '';
+                    showDashboardWorkspace();
+                } else {
+                    if (errorElem) errorElem.classList.remove('hidden');
+                    keyInput.focus();
+                }
+            }
+        }
+
+        function handleAdminLogout() {
+            playSound('click');
+            sessionStorage.removeItem('vsos_admin_authenticated');
+            showLoginScreen();
+        }
+
+        async function handleGameFormSubmit(event) {
+            event.preventDefault();
+            playSound('click');
+
+            const editId = document.getElementById('edit-game-id').value;
+            const title = document.getElementById('game-title').value.trim();
+            const description = document.getElementById('game-description').value.trim();
+            const rawThumbnail = document.getElementById('game-thumbnail').value.trim();
+            const tags = document.getElementById('game-tags').value.trim();
+            const embed = document.getElementById('game-embed').value.trim();
+            const playUrl = document.getElementById('game-playUrl').value.trim();
+            const linkTextVal = document.getElementById('game-linkText').value.trim();
+
+            // Auto-resolve any ImgBB viewer page URLs to raw direct rendering assets
+            const thumbnail = resolveDirectThumbnailUrl(rawThumbnail);
+
+            // Default link text if left blank
+            const linkText = linkTextVal || "Launch Store";
+            const featured = document.getElementById('game-featured').checked;
+
+            const payload = {
+                title,
+                description,
+                thumbnail,
+                tags,
+                embed,
+                playUrl,
+                linkText,
+                featured,
+                createdAt: new Date().toISOString()
+            };
+
+            // In-Memory state local update logic
+            if (window.vsosState.useInMemoryFallback || !window.vsosState.currentUser) {
+                if (featured) {
+                    window.vsosState.games.forEach(g => g.featured = false);
+                }
+
+                if (editId) {
+                    const idx = window.vsosState.games.findIndex(g => g.id === editId);
+                    if (idx > -1) {
+                        const oldGame = window.vsosState.games[idx];
+                        payload.id = editId;
+                        payload.views = oldGame.views || 0;
+                        window.vsosState.games[idx] = payload;
+                    }
+                } else {
+                    payload.id = "local-" + Date.now();
+                    payload.views = 0;
+                    window.vsosState.games.unshift(payload);
+                }
+
+                renderMainCatalogUI();
+                renderFeaturedGameUI();
+                renderAdminCatalog();
+                updateStudioStats();
+                resetGameForm();
+                return;
+            }
+
+            // Maintain Spotlight lock configuration (Maximum of 1 featured game active - Rule 2)
+            if (featured) {
+                for (let g of window.vsosState.games) {
+                    if (g.id !== editId && g.featured) {
+                        try {
+                            const staleFeaturedRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', g.id);
+                            await updateDoc(staleFeaturedRef, { featured: false });
+                        } catch (err) {
+                            console.warn("Unsetting other spotlight models failed:", err);
+                        }
+                    }
+                }
+            }
+
+            try {
+                if (editId) {
+                    const gameRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', editId);
+                    const existingGame = window.vsosState.games.find(g => g.id === editId);
+                    payload.views = existingGame ? (existingGame.views || 0) : 0;
+                    
+                    await setDoc(gameRef, payload);
+                } else {
+                    payload.views = 0;
+                    const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'games');
+                    await addDoc(colRef, payload);
+                }
+                
+                resetGameForm();
+            } catch (err) {
+                console.warn("Failed executing catalog update on cloud database. Storing locally instead:", err);
+            }
+        }
+
+        function editGame(gameId) {
+            playSound('click');
+            const game = window.vsosState.games.find(g => g.id === gameId);
+            if (!game) return;
+
+            document.getElementById('edit-game-id').value = game.id;
+            document.getElementById('game-title').value = game.title;
+            document.getElementById('game-description').value = game.description;
+            document.getElementById('game-thumbnail').value = game.thumbnail;
+            document.getElementById('game-tags').value = game.tags || '';
+            document.getElementById('game-embed').value = game.embed;
+            document.getElementById('game-playUrl').value = game.playUrl;
+            document.getElementById('game-linkText').value = game.linkText || '';
+            document.getElementById('game-featured').checked = !!game.featured;
+
+            document.getElementById('form-action-title').textContent = "EDIT SPECIFIED MODULE";
+            document.getElementById('form-submit-btn').textContent = "SAVE CHANGES";
+            document.getElementById('form-cancel-btn').classList.remove('hidden');
+        }
+
+        function resetGameForm() {
+            const editId = document.getElementById('edit-game-id');
+            if (editId) editId.value = "";
+            const form = document.getElementById('game-editor-form');
+            if (form) form.reset();
+            
+            const formTitle = document.getElementById('form-action-title');
+            if (formTitle) formTitle.textContent = "ADD NEW ARCADE MODULE";
+            const formSubmit = document.getElementById('form-submit-btn');
+            if (formSubmit) formSubmit.textContent = "PUBLISH MODULE";
+            const formCancel = document.getElementById('form-cancel-btn');
+            if (formCancel) formCancel.classList.add('hidden');
+        }
+
+        async function deleteGame(gameId) {
+            if (!confirm("Are you sure you want to permanently delete this game module?")) return;
+            playSound('click');
+
+            if (window.vsosState.useInMemoryFallback || !window.vsosState.currentUser) {
+                window.vsosState.games = window.vsosState.games.filter(g => g.id !== gameId);
+                renderMainCatalogUI();
+                renderFeaturedGameUI();
+                renderAdminCatalog();
+                updateStudioStats();
+                return;
+            }
+
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', gameId);
+                await deleteDoc(docRef);
+            } catch (err) {
+                console.warn("Failed executing deletion workflow on cloud:", err);
+            }
+        }
+
+        async function quickFeatureGame(gameId, targetState) {
+            playSound('click');
+
+            if (window.vsosState.useInMemoryFallback || !window.vsosState.currentUser) {
+                if (targetState) {
+                    window.vsosState.games.forEach(g => g.featured = false);
+                }
+                const game = window.vsosState.games.find(g => g.id === gameId);
+                if (game) game.featured = targetState;
+
+                renderMainCatalogUI();
+                renderFeaturedGameUI();
+                renderAdminCatalog();
+                updateStudioStats();
+                return;
+            }
+
+            try {
+                if (targetState) {
+                    for (let g of window.vsosState.games) {
+                        if (g.id !== gameId && g.featured) {
+                            const staleRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', g.id);
+                            await updateDoc(staleRef, { featured: false });
+                        }
+                    }
+                }
+
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', gameId);
+                await updateDoc(docRef, { featured: targetState });
+            } catch (err) {
+                console.warn("Failed updating spotlight status on database:", err);
+            }
+        }
+
+        function renderAdminCatalog() {
+            const container = document.getElementById('admin-catalog-list');
+            if (!container) return;
+
+            const searchKey = document.getElementById('dash-game-search').value.toLowerCase().trim();
+
+            const filtered = window.vsosState.games.filter(g => 
+                !searchKey || g.title.toLowerCase().includes(searchKey)
+            );
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="py-12 text-center text-gray-500 text-xs">
+                        No modules found in active catalog register matching query.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(game => {
+                return `
+                    <div class="glassmorphism p-4 rounded-xl border border-white/5 flex items-center justify-between gap-4 animate-fade-in">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <img src="${escapeHtml(game.thumbnail)}" alt="Thumbnail" class="h-10 w-10 object-cover rounded-lg bg-dark-800" onerror="this.onerror=null; this.src='https://via.placeholder.com/150'">
+                            <div class="min-w-0">
+                                <h4 class="font-bold text-sm text-white truncate">${escapeHtml(game.title)}</h4>
+                                <div class="flex items-center gap-2 mt-0.5 text-[10px] text-gray-400">
+                                    <span class="flex items-center gap-0.5"><i class="fas fa-eye"></i> ${game.views || 0}</span>
+                                    <span>•</span>
+                                    <span class="truncate max-w-[120px]">${game.tags || 'no-tags'}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-1">
+                            <button onclick="quickFeatureGame('${escapeHtml(game.id)}', ${!game.featured})" class="p-2 text-xs rounded hover:bg-brand-500/10 ${game.featured ? 'text-amber-400' : 'text-gray-400 hover:text-white'}" title="${game.featured ? 'Remove from spotlight' : 'Set as Spotlight'}">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button onclick="editGame('${escapeHtml(game.id)}')" class="p-2 text-xs rounded hover:bg-brand-500/10 text-brand-300 hover:text-brand-400" title="Modify Specs">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="deleteGame('${escapeHtml(game.id)}')" class="p-2 text-xs rounded hover:bg-red-500/10 text-red-400 hover:text-red-500" title="Delete permanently">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function exportGamesJSON() {
+            playSound('click');
+            if (window.vsosState.games.length === 0) {
+                alert("The arcade portfolio currently contains zero records to export.");
+                return;
+            }
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(window.vsosState.games, null, 2));
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "vsos_games_backup.json");
+            dlAnchorElem.click();
+        }
+
+        async function importGamesJSON(event) {
+            playSound('click');
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (!Array.isArray(parsed)) {
+                        alert("Invalid file encoding. Backups must align with JSON structures.");
+                        return;
+                    }
+
+                    if (window.vsosState.useInMemoryFallback || !window.vsosState.currentUser) {
+                        parsed.forEach(item => {
+                            item.id = "local-" + Math.random().toString(36).substring(2);
+                            window.vsosState.games.unshift(item);
+                        });
+                        renderMainCatalogUI();
+                        renderFeaturedGameUI();
+                        renderAdminCatalog();
+                        updateStudioStats();
+                        alert(`Imported ${parsed.length} items locally to your current session!`);
+                        event.target.value = '';
+                        return;
+                    }
+
+                    let successCount = 0;
+                    for (const item of parsed) {
+                        const docPayload = {
+                            title: item.title || "Untitled Module",
+                            description: item.description || "Experimental Project Build",
+                            thumbnail: item.thumbnail || "https://via.placeholder.com/600x350",
+                            tags: item.tags || "HTML5",
+                            embed: item.embed || "",
+                            playUrl: item.playUrl || "https://vsos.itch.io",
+                            linkText: item.linkText || "Visit Store",
+                            featured: !!item.featured,
+                            views: item.views || 0,
+                            createdAt: item.createdAt || new Date().toISOString()
+                        };
+
+                        const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'games');
+                        await addDoc(colRef, docPayload);
+                        successCount++;
+                    }
+
+                    alert(`Import operation successful! Rendered ${successCount} modules to active database.`);
+                    event.target.value = '';
+                } catch (err) {
+                    alert("Import workflow error: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function toggleOverlayFullscreen() {
+            playSound('click');
+            const container = document.getElementById('iframe-outer-container');
+            if (!container) return;
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                container.requestFullscreen().catch(err => {
+                    console.warn("Fullscreen permission rejected:", err);
+                });
+            }
+        }
+
+        // Dedicated URL routing listener function to handle showing/hiding admin panel
+        function checkHashRoute() {
+            const currentHash = window.location.hash;
+            const panel = document.getElementById('admin-panel');
+            if (!panel) return;
+            
+            if (currentHash === '#admin') {
+                panel.classList.remove('hidden');
+                if (sessionStorage.getItem('vsos_admin_authenticated') === 'true') {
+                    showDashboardWorkspace();
+                } else {
+                    showLoginScreen();
+                }
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+
+        window.addEventListener('hashchange', checkHashRoute);
+        window.addEventListener('load', checkHashRoute);
+
+        function escapeHtml(unsafe) {
+            if (!unsafe) return "";
+            return unsafe
+                 .toString()
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        // Initialize connection
+        authenticateAndSync();
+
+    </script>
+</body>
+</html>
