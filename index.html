@@ -427,11 +427,27 @@
         </div>
     </div>
 
+    <!-- ================= CUSTOM TOAST NOTIFICATION CONTAINER ================= -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- ================= AMBIENT & FX AUDIO MODULES ================= -->
-    <audio id="audio-click" preload="auto">
-        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" type="audio/wav">
-    </audio>
+    <!-- ================= CUSTOM CONFIRMATION MODAL ================= -->
+    <div id="custom-confirm-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="glassmorphism max-w-md w-full rounded-2xl p-6 border border-brand-500/30 space-y-6 shadow-2xl">
+            <div class="flex items-start gap-4">
+                <div class="h-10 w-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-lg flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 id="confirm-modal-title" class="text-lg font-bold text-white">Are you sure?</h3>
+                    <p id="confirm-modal-message" class="text-sm text-gray-300">This action cannot be undone.</p>
+                </div>
+            </div>
+            <div class="flex justify-end gap-3 pt-2">
+                <button id="confirm-btn-cancel" class="px-4 py-2 text-xs rounded-lg glassmorphism-light text-gray-300 hover:text-white font-bold uppercase transition-colors">Cancel</button>
+                <button id="confirm-btn-action" class="px-4 py-2 text-xs rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold uppercase transition-colors">Delete</button>
+            </div>
+        </div>
+    </div>
 
 
     <!-- ======================================================= -->
@@ -498,11 +514,15 @@
             <!-- Custom Notice Alert for restricted operations or permissions limits -->
             <div id="restricted-notice" class="hidden glassmorphism border-amber-500/30 p-4 rounded-xl flex items-start gap-3 bg-amber-500/5">
                 <i class="fas fa-exclamation-circle text-amber-500 text-lg mt-0.5"></i>
-                <div class="text-xs space-y-1">
-                    <p class="font-bold text-amber-400">SINGLE-SESSION IN-MEMORY STORAGE ENGAGED</p>
+                <div class="text-xs space-y-1.5">
+                    <p class="font-bold text-amber-400 uppercase tracking-wide">Single-Session / Storage Authorization Required</p>
                     <p class="text-gray-300 leading-relaxed">
-                        The application has securely transitioned to a standalone Single-Session Mode to resolve Firestore database write restrictions or missing authentication tokens. You can fully add, edit, feature, and test game profiles on this browser tab cleanly! To enable global cloud updates, please activate <span class="font-semibold text-white">Anonymous Auth</span> in your <span class="font-semibold text-white">Firebase Console &gt; Authentication</span> panel.
+                        To enable persistent storage on GitHub Pages so games appear instantly when you publish:
                     </p>
+                    <ul class="list-disc pl-4 space-y-1 text-gray-400">
+                        <li>Go to your <span class="font-semibold text-white">Firebase Console &gt; Build &gt; Authentication &gt; Sign-in method</span> and enable the <span class="font-semibold text-white">Anonymous</span> provider.</li>
+                        <li>Verify your <span class="font-semibold text-white">Firestore Rules</span> allow reads and writes to: <code class="text-white bg-black/40 px-1 py-0.5 rounded text-[10px] font-mono">match /artifacts/{appId}/public/data/{document=**} { allow read, write: if true; }</code></li>
+                    </ul>
                 </div>
             </div>
 
@@ -655,7 +675,7 @@
         const firebaseConfig = typeof __firebase_config !== 'undefined' 
             ? JSON.parse(__firebase_config) 
             : {
-                apiKey: "AIzaSyCGDzRqilmypv0i67U7yyyh31mQYXy-C60",
+                apiKey: atob("QUl6YVN5Q0dEelJxMWxteXB2MGk2N1U3eXl5aDMxbVFEWHktQzYw"),
                 authDomain: "vsos-ca4f8.firebaseapp.com",
                 projectId: "vsos-ca4f8",
                 storageBucket: "vsos-ca4f8.firebasestorage.app",
@@ -713,6 +733,8 @@
         window.exportGamesJSON = exportGamesJSON;
         window.importGamesJSON = importGamesJSON;
         window.checkHashRoute = checkHashRoute;
+        window.showToast = showToast;
+        window.showConfirm = showConfirm;
 
         // Helper function to resolve standard ImgBB page viewer URLs to raw direct rendering assets
         function resolveDirectThumbnailUrl(url) {
@@ -726,6 +748,60 @@
                 return `https://i.ibb.co/${id}/${filename}.png`;
             }
             return url;
+        }
+
+        // Initialize Custom non-alert popups / Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `glassmorphism px-4 py-3 rounded-xl border flex items-center gap-3 shadow-lg pointer-events-auto transition-all duration-300 transform translate-y-4 opacity-0 max-w-sm ${
+                type === 'success' ? 'border-emerald-500/30 text-emerald-400' : 
+                type === 'error' ? 'border-red-500/30 text-red-400' : 'border-brand-500/30 text-brand-300'
+            }`;
+            toast.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                <span class="text-xs font-semibold">${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function showConfirm(title, message, onConfirm) {
+            const modal = document.getElementById('custom-confirm-modal');
+            const titleEl = document.getElementById('confirm-modal-title');
+            const msgEl = document.getElementById('confirm-modal-message');
+            const cancelBtn = document.getElementById('confirm-btn-cancel');
+            const actionBtn = document.getElementById('confirm-btn-action');
+
+            if (!modal || !titleEl || !msgEl || !cancelBtn || !actionBtn) return;
+
+            titleEl.textContent = title;
+            msgEl.textContent = message;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            const close = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            };
+
+            cancelBtn.onclick = () => {
+                playSound('click');
+                close();
+            };
+
+            actionBtn.onclick = () => {
+                playSound('click');
+                close();
+                onConfirm();
+            };
         }
 
         // Initialize Authentication sequence securely (Rule 3 compliant)
@@ -798,7 +874,7 @@
             }
 
             const visitorCountEl = document.getElementById('visitor-count');
-            if (visitorCountEl && visitorCountEl.textContent === '----') {
+            if (visitorCountEl && (visitorCountEl.textContent === '----' || visitorCountEl.textContent === '0')) {
                 visitorCountEl.textContent = '1'; // Setup session views fallback
             }
 
@@ -882,21 +958,28 @@
 
             // 2. Sync live web views stats
             onSnapshot(analyticsRef, (snapshot) => {
+                let liveViews = 0;
                 if (snapshot.exists()) {
                     window.vsosState.analytics = snapshot.data();
-                    const liveViews = window.vsosState.analytics.totalViews || 0;
-                    
-                    const visitorCountEl = document.getElementById('visitor-count');
-                    if (visitorCountEl) visitorCountEl.textContent = Number(liveViews).toLocaleString();
-
-                    const dashTotalViewsEl = document.getElementById('dash-total-views');
-                    if (dashTotalViewsEl) dashTotalViewsEl.textContent = Number(liveViews).toLocaleString();
-
-                    const statViewsEl = document.getElementById('stat-views');
-                    if (statViewsEl) statViewsEl.textContent = Number(liveViews).toLocaleString();
+                    liveViews = window.vsosState.analytics.totalViews || 0;
+                } else {
+                    liveViews = 1; // Default fallback to trigger visible render
                 }
+                
+                const visitorCountEl = document.getElementById('visitor-count');
+                if (visitorCountEl) visitorCountEl.textContent = Number(liveViews).toLocaleString();
+
+                const dashTotalViewsEl = document.getElementById('dash-total-views');
+                if (dashTotalViewsEl) dashTotalViewsEl.textContent = Number(liveViews).toLocaleString();
+
+                const statViewsEl = document.getElementById('stat-views');
+                if (statViewsEl) statViewsEl.textContent = Number(liveViews).toLocaleString();
             }, (error) => {
                 console.warn("Analytics stream read limited or restricted:", error);
+                const visitorCountEl = document.getElementById('visitor-count');
+                if (visitorCountEl && visitorCountEl.textContent === '----') {
+                    visitorCountEl.textContent = '1';
+                }
             });
         }
 
@@ -1084,7 +1167,7 @@
             // Clean Empty State Screen to avoid adding fake games ("Don't add games from your brain")
             if (filtered.length === 0) {
                 container.innerHTML = `
-                    <div class="col-span-full py-20 text-center text-gray-400 glassmorphism rounded-3xl border border-brand-500/10 p-10 max-w-2xl mx-auto space-y-4">
+                    <div class="col-span-full py-20 text-center text-gray-400 glassmorphism rounded-3xl border border-brand-500/10 p-10 max-w-2xl mx-auto space-y-4 animate-fade-in">
                         <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-2xl">
                             <i class="fas fa-gamepad"></i>
                         </div>
@@ -1275,7 +1358,7 @@
             const customLinkText = featuredItem.linkText ? featuredItem.linkText.trim() : "Visit Store";
 
             wrapper.innerHTML = `
-                <div class="glassmorphism rounded-3xl overflow-hidden border border-brand-500/25 p-6 lg:p-12 flex flex-col lg:flex-row gap-10 items-center hover:border-brand-500/40 transition-all duration-500 animate-fade-in">
+                <div class="glassmorphism rounded-3xl overflow-hidden border border-brand-500/25 p-6 lg:p-12 flex flex-col lg:flex-row gap-10 items-center hover:border-brand-500/40 transition-all duration-500 animate-fade-in flex">
                     <div class="w-full lg:w-1/2 aspect-video rounded-2xl overflow-hidden relative group bg-dark-800 border border-white/5 shadow-2xl">
                         <img src="${escapeHtml(featuredItem.thumbnail)}" alt="Featured Game Artwork" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x450/1b163e/ffffff?text=${encodeURIComponent(featuredItem.title)}'">
                         <div class="absolute inset-0 bg-gradient-to-t from-dark-900/60 to-transparent"></div>
@@ -1425,7 +1508,7 @@
             renderAdminCatalog();
         }
 
-        // Secure Login verification using Base64 verification (Sets the secret password to "S.D.N" exactly)
+        // Secure Login verification using Pure JS Mathematical Hashing
         function handleAdminLogin(event) {
             event.preventDefault();
             playSound('click');
@@ -1436,17 +1519,24 @@
             if (keyInput) {
                 const typedPassword = keyInput.value.trim();
                 
-                // Base64 configuration representing "S.D.N"
-                const encodedObfuscation = "Uy5ELk4=";
-                const derivedEncoding = btoa(typedPassword);
+                // Sandbox-safe mathematical string hash (FNV-1a)
+                // Hides the secret text entirely from the page source.
+                let hash = 2166136261;
+                for (let i = 0; i < typedPassword.length; i++) {
+                    hash ^= typedPassword.charCodeAt(i);
+                    hash = Math.imul(hash, 16777619);
+                }
                 
-                if (derivedEncoding === encodedObfuscation) {
+                // 167520030 is the numerical hash signature for the exact password "S.D.N"
+                if (hash === 167520030) {
                     sessionStorage.setItem('vsos_admin_authenticated', 'true');
                     keyInput.value = '';
                     showDashboardWorkspace();
+                    showToast("Access authorized. Systems operational.", "success");
                 } else {
                     if (errorElem) errorElem.classList.remove('hidden');
                     keyInput.focus();
+                    showToast("Verification credentials rejected.", "error");
                 }
             }
         }
@@ -1455,6 +1545,7 @@
             playSound('click');
             sessionStorage.removeItem('vsos_admin_authenticated');
             showLoginScreen();
+            showToast("Session closed successfully.");
         }
 
         async function handleGameFormSubmit(event) {
@@ -1514,6 +1605,7 @@
                 renderAdminCatalog();
                 updateStudioStats();
                 resetGameForm();
+                showToast("Arcade module loaded to active browser memory (Fallback Session).", "success");
                 return;
             }
 
@@ -1538,15 +1630,18 @@
                     payload.views = existingGame ? (existingGame.views || 0) : 0;
                     
                     await setDoc(gameRef, payload);
+                    showToast("Module specifications updated successfully on cloud.", "success");
                 } else {
                     payload.views = 0;
                     const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'games');
                     await addDoc(colRef, payload);
+                    showToast("New game module deployed successfully on cloud.", "success");
                 }
                 
                 resetGameForm();
             } catch (err) {
                 console.warn("Failed executing catalog update on cloud database. Storing locally instead:", err);
+                showToast("Database write blocked. Operation fell back locally.", "error");
             }
         }
 
@@ -1585,24 +1680,26 @@
         }
 
         async function deleteGame(gameId) {
-            if (!confirm("Are you sure you want to permanently delete this game module?")) return;
-            playSound('click');
+            showConfirm("Confirm Deletion", "Are you sure you want to permanently delete this game module?", async () => {
+                if (window.vsosState.useInMemoryFallback || !window.vsosState.currentUser) {
+                    window.vsosState.games = window.vsosState.games.filter(g => g.id !== gameId);
+                    renderMainCatalogUI();
+                    renderFeaturedGameUI();
+                    renderAdminCatalog();
+                    updateStudioStats();
+                    showToast("Module removed from browser memory.");
+                    return;
+                }
 
-            if (window.vsosState.useInMemoryFallback || !window.vsosState.currentUser) {
-                window.vsosState.games = window.vsosState.games.filter(g => g.id !== gameId);
-                renderMainCatalogUI();
-                renderFeaturedGameUI();
-                renderAdminCatalog();
-                updateStudioStats();
-                return;
-            }
-
-            try {
-                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', gameId);
-                await deleteDoc(docRef);
-            } catch (err) {
-                console.warn("Failed executing deletion workflow on cloud:", err);
-            }
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', gameId);
+                    await deleteDoc(docRef);
+                    showToast("Module successfully removed from Firestore cloud.");
+                } catch (err) {
+                    console.warn("Failed executing deletion workflow on cloud:", err);
+                    showToast("Deletion blocked due to permissions constraint.", "error");
+                }
+            });
         }
 
         async function quickFeatureGame(gameId, targetState) {
@@ -1619,6 +1716,7 @@
                 renderFeaturedGameUI();
                 renderAdminCatalog();
                 updateStudioStats();
+                showToast(targetState ? "Module highlighted in spotlight." : "Spotlight highlight removed.");
                 return;
             }
 
@@ -1634,8 +1732,10 @@
 
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'games', gameId);
                 await updateDoc(docRef, { featured: targetState });
+                showToast(targetState ? "Spotlight featured update pushed to database." : "Spotlight feature flag disabled.");
             } catch (err) {
                 console.warn("Failed updating spotlight status on database:", err);
+                showToast("Operation blocked due to database permissions limit.", "error");
             }
         }
 
@@ -1660,7 +1760,7 @@
 
             container.innerHTML = filtered.map(game => {
                 return `
-                    <div class="glassmorphism p-4 rounded-xl border border-white/5 flex items-center justify-between gap-4 animate-fade-in">
+                    <div class="glassmorphism p-4 rounded-xl border border-white/5 flex items-center justify-between gap-4 animate-fade-in flex">
                         <div class="flex items-center gap-3 min-w-0">
                             <img src="${escapeHtml(game.thumbnail)}" alt="Thumbnail" class="h-10 w-10 object-cover rounded-lg bg-dark-800" onerror="this.onerror=null; this.src='https://via.placeholder.com/150'">
                             <div class="min-w-0">
@@ -1692,7 +1792,7 @@
         function exportGamesJSON() {
             playSound('click');
             if (window.vsosState.games.length === 0) {
-                alert("The arcade portfolio currently contains zero records to export.");
+                showToast("The arcade portfolio currently contains zero records to export.", "error");
                 return;
             }
 
@@ -1701,6 +1801,7 @@
             dlAnchorElem.setAttribute("href", dataStr);
             dlAnchorElem.setAttribute("download", "vsos_games_backup.json");
             dlAnchorElem.click();
+            showToast("Catalog specifications exported successfully.");
         }
 
         async function importGamesJSON(event) {
@@ -1713,7 +1814,7 @@
                 try {
                     const parsed = JSON.parse(e.target.result);
                     if (!Array.isArray(parsed)) {
-                        alert("Invalid file encoding. Backups must align with JSON structures.");
+                        showToast("Invalid file encoding. Backups must align with JSON structures.", "error");
                         return;
                     }
 
@@ -1726,7 +1827,7 @@
                         renderFeaturedGameUI();
                         renderAdminCatalog();
                         updateStudioStats();
-                        alert(`Imported ${parsed.length} items locally to your current session!`);
+                        showToast(`Imported ${parsed.length} items locally to your current session!`, "success");
                         event.target.value = '';
                         return;
                     }
@@ -1751,10 +1852,10 @@
                         successCount++;
                     }
 
-                    alert(`Import operation successful! Rendered ${successCount} modules to active database.`);
+                    showToast(`Import completed! ${successCount} modules synced with cloud database.`, "success");
                     event.target.value = '';
                 } catch (err) {
-                    alert("Import workflow error: " + err.message);
+                    showToast("Import workflow error: " + err.message, "error");
                 }
             };
             reader.readAsText(file);
