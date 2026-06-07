@@ -514,15 +514,17 @@
             <!-- Custom Notice Alert for restricted operations or permissions limits -->
             <div id="restricted-notice" class="hidden glassmorphism border-amber-500/30 p-4 rounded-xl flex items-start gap-3 bg-amber-500/5">
                 <i class="fas fa-exclamation-circle text-amber-500 text-lg mt-0.5"></i>
-                <div class="text-xs space-y-1.5">
-                    <p class="font-bold text-amber-400 uppercase tracking-wide">Single-Session / Storage Authorization Required</p>
+                <div class="text-xs space-y-1.5 w-full">
+                    <p class="font-bold text-amber-400 uppercase tracking-wide">Cloud Database Setup Required for GitHub Pages</p>
                     <p class="text-gray-300 leading-relaxed">
-                        To enable persistent storage on GitHub Pages so games appear instantly when you publish:
+                        The app is currently in <strong>Local Fallback Mode</strong> because it was blocked by your Firebase settings. Games will vanish on refresh until you fix this. To enable persistent global storage on GitHub Pages:
                     </p>
-                    <ul class="list-disc pl-4 space-y-1 text-gray-400">
-                        <li>Go to your <span class="font-semibold text-white">Firebase Console &gt; Build &gt; Authentication &gt; Sign-in method</span> and enable the <span class="font-semibold text-white">Anonymous</span> provider.</li>
-                        <li>Verify your <span class="font-semibold text-white">Firestore Rules</span> allow reads and writes to: <code class="text-white bg-black/40 px-1 py-0.5 rounded text-[10px] font-mono">match /artifacts/{appId}/public/data/{document=**} { allow read, write: if true; }</code></li>
+                    <ul class="list-disc pl-4 space-y-1 text-gray-400 pb-1">
+                        <li><strong class="text-white">Enable Auth:</strong> Go to Firebase Console &gt; Authentication &gt; Sign-in method &gt; Enable <strong>Anonymous</strong>.</li>
+                        <li><strong class="text-white">Authorize Domain:</strong> Go to Authentication &gt; Settings &gt; Authorized domains &gt; Add <strong>github.io</strong> (or your custom domain).</li>
+                        <li><strong class="text-white">Open Rules:</strong> Go to Firestore Database &gt; Rules and paste this exactly:<br> <code class="text-white bg-black/40 px-2 py-1 rounded text-[10px] font-mono mt-1 block">match /{document=**} { allow read, write: if true; }</code></li>
                     </ul>
+                    <p class="text-gray-500 text-[10px] italic">Once completed, refresh the page to connect securely to your global database!</p>
                 </div>
             </div>
 
@@ -741,11 +743,14 @@
             if (!url) return "";
             url = url.trim();
             // Matches viewer page url pattern: ibb.co/abcdefg or ibb.co/abcdefg/name
-            const match = url.match(/(?:https?:\/\/)?ibb\.co\/([a-zA-Z0-9]+)(?:\/([a-zA-Z0-9\-_]+))?/i);
-            if (match) {
+            const match = url.match(/(?:https?:\/\/)?(?:i\.)?ibb\.co\/([a-zA-Z0-9]+)(?:\/([a-zA-Z0-9\-_.]+))?/i);
+            if (match && match[1]) {
                 const id = match[1];
-                const filename = match[2] ? match[2] : "image";
-                return `https://i.ibb.co/${id}/${filename}.png`;
+                let filename = match[2] || "image.png";
+                if (!filename.toLowerCase().endsWith('.png') && !filename.toLowerCase().endsWith('.jpg') && !filename.toLowerCase().endsWith('.jpeg') && !filename.toLowerCase().endsWith('.gif')) {
+                    filename += '.png';
+                }
+                return `https://i.ibb.co/${id}/${filename}`;
             }
             return url;
         }
@@ -847,9 +852,9 @@
             try {
                 await signInAnonymously(auth);
             } catch (error) {
-                // Catch auth/admin-restricted-operation (anonymous sign-in disabled in console)
-                if (error.code === 'auth/admin-restricted-operation') {
-                    console.warn("Anonymous Authentication is disabled in Firebase console. Engaging diagnostic fallback session...");
+                // Catch auth/admin-restricted-operation (anonymous sign-in disabled in console) or unauthorized domains (GitHub pages)
+                if (error.code === 'auth/admin-restricted-operation' || error.code === 'auth/operation-not-allowed' || error.code === 'auth/unauthorized-domain') {
+                    console.warn(`Firebase Auth blocked (${error.code}). Engaging diagnostic fallback session...`);
                     activateInMemoryFallbackMode();
                 } else {
                     throw error;
@@ -1508,7 +1513,7 @@
             renderAdminCatalog();
         }
 
-        // Secure Login verification using Pure JS Mathematical Hashing
+        // Secure Login verification using character codes to hide the password from plain sight
         function handleAdminLogin(event) {
             event.preventDefault();
             playSound('click');
@@ -1519,16 +1524,15 @@
             if (keyInput) {
                 const typedPassword = keyInput.value.trim();
                 
-                // Sandbox-safe mathematical string hash (FNV-1a)
-                // Hides the secret text entirely from the page source.
-                let hash = 2166136261;
-                for (let i = 0; i < typedPassword.length; i++) {
-                    hash ^= typedPassword.charCodeAt(i);
-                    hash = Math.imul(hash, 16777619);
-                }
+                // Checks for "S.D.N" using character codes (83, 46, 68, 46, 78) to keep it hidden
+                const isValid = typedPassword.length === 5 && 
+                                typedPassword.charCodeAt(0) === 83 && 
+                                typedPassword.charCodeAt(1) === 46 && 
+                                typedPassword.charCodeAt(2) === 68 && 
+                                typedPassword.charCodeAt(3) === 46 && 
+                                typedPassword.charCodeAt(4) === 78;
                 
-                // 167520030 is the numerical hash signature for the exact password "S.D.N"
-                if (hash === 167520030) {
+                if (isValid) {
                     sessionStorage.setItem('vsos_admin_authenticated', 'true');
                     keyInput.value = '';
                     showDashboardWorkspace();
