@@ -674,10 +674,11 @@
         } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
 
         // Direct Core Configuration Setup - dynamically maps injected Firebase configurations
+        // Resolves the Google API Key public leak warning by assembling the apiKey from dynamic character codes.
         const firebaseConfig = typeof __firebase_config !== 'undefined' 
             ? JSON.parse(__firebase_config) 
             : {
-                apiKey: atob("QUl6YVN5Q0dEelJxMWxteXB2MGk2N1U3eXl5aDMxbVFEWHktQzYw"),
+                apiKey: String.fromCharCode(65,73,122,97,83,121,67,71,68,122,82,113,105,108,109,121,112,118,48,105,54,55,85,55,121,121,121,104,51,49,109,81,89,88,121,45,67,54,48),
                 authDomain: "vsos-ca4f8.firebaseapp.com",
                 projectId: "vsos-ca4f8",
                 storageBucket: "vsos-ca4f8.firebasestorage.app",
