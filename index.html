@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO Meta Tags -->
-    <title>VSOS — Games, AI &amp; Digital Experiences</title>
-    <meta name="title" content="VSOS — Games, AI &amp; Digital Experiences">
-    <meta name="description" content="VSOS creates arcade games, AI-powered content, browser experiences, and experimental digital projects.">
+    <title>VSOS | Indie Game Studio & Experimental Web Arcade</title>
+    <meta name="title" content="VSOS | Indie Game Studio & Experimental Web Arcade">
+    <meta name="description" content="VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.">
+    <meta name="keywords" content="VSOS, indie games, game developer, browser games, HTML5 games, javascript games, VSOS AI videos, video links, web app, mobile app, github pages, web arcade, game studio, arcade">
     <meta name="author" content="VSOS">
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <meta name="google-site-verification" content="Rhn59NiWqBvIq5dtLGz2Nms6FkMKdHJl-sHLrEUjKcA" />
-    <link rel="canonical" href="https://saadellabban164-ui.github.io/vsos/">
     <meta name="theme-color" content="#030014">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,18 +18,17 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://saadellabban164-ui.github.io/vsos/">
-    <meta property="og:title" content="VSOS — Games, AI &amp; Digital Experiences">
-    <meta property="og:description" content="VSOS creates arcade games, AI-powered content, browser experiences, and experimental digital projects.">
+    <meta property="og:url" content="https://vsos.itch.io">
+    <meta property="og:title" content="VSOS | Indie Game Studio & Experimental Web Arcade">
+    <meta property="og:description" content="VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.">
     <meta property="og:image" content="https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png">
-    <meta property="og:site_name" content="VSOS">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://saadellabban164-ui.github.io/vsos/">
-    <meta name="twitter:title" content="VSOS — Games, AI &amp; Digital Experiences">
-    <meta name="twitter:description" content="VSOS creates arcade games, AI-powered content, browser experiences, and experimental digital projects.">
-    <meta name="twitter:image" content="https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vsos.itch.io">
+    <meta property="twitter:title" content="VSOS | Indie Game Studio & Experimental Web Arcade">
+    <meta property="twitter:description" content="VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.">
+    <meta property="twitter:image" content="https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png">
@@ -147,10 +143,10 @@
       "@context": "https://schema.org",
       "@type": "VideoGameOrganization",
       "name": "VSOS",
-      "description": "VSOS creates arcade games, AI-powered content, browser experiences, and experimental digital projects.",
+      "description": "VSOS is an indie game developer creating fast-paced browser games, arcade experiences, and experimental projects built with HTML5 and JavaScript.",
       "logo": "https://i.ibb.co/qYf24FKn/Gemini-Generated-Image-n2v981n2v981n2v9.png",
       "image": "https://i.ibb.co/PZ6fXZ3v/Gemini-Generated-Image-exsvksexsvksexsv.png",
-      "url": "https://saadellabban164-ui.github.io/vsos/",
+      "url": "https://vsos.itch.io",
       "sameAs": [
         "https://github.com/saadellabban164-ui",
         "https://vsos.itch.io"
@@ -802,7 +798,8 @@
             onSnapshot, 
             query, 
             orderBy, 
-            getDocs 
+            getDocs,
+            serverTimestamp,
         } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
         import { 
             getAuth, 
@@ -1303,26 +1300,55 @@ window.requestVsosAiAccess = function () {
         }
 
         // Initialize visitor metrics tracking using correct Rule 1 absolute path
-        async function handleVisitorMetrics() {
-            // Guard every Firestore operation (Rule 3)
-            if (!window.vsosState.currentUser || window.vsosState.useInMemoryFallback) return;
-            
-            const analyticsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'analytics', 'totals');
-            
-            try {
-                // Increment visitor count atomically once per session (Auto-creates analytics document if missing)
-                const sessionKey = 'vsos_session_counted';
-                if (!sessionStorage.getItem(sessionKey)) {
-                    await setDoc(analyticsDocRef, { 
-                        totalViews: increment(1) 
-                    }, { merge: true });
-                    sessionStorage.setItem(sessionKey, 'true');
-                }
-            } catch (err) {
-                console.warn("Analytics permission blocked by security rules. Activating local session counters:", err);
-                activateInMemoryFallbackMode();
-            }
+       async function handleVisitorMetrics() {
+    if (!window.vsosState.currentUser || window.vsosState.useInMemoryFallback) return;
+
+    const user = window.vsosState.currentUser;
+
+    const analyticsDocRef = doc(
+        db,
+        'artifacts',
+        appId,
+        'public',
+        'data',
+        'analytics',
+        'totals'
+    );
+
+    const visitorDocRef = doc(
+        db,
+        'artifacts',
+        appId,
+        'public',
+        'data',
+        'analytics',
+        'visitors',
+        user.uid
+    );
+
+    try {
+        const visitorSnapshot = await getDoc(visitorDocRef);
+
+        if (visitorSnapshot.exists()) {
+            return;
         }
+
+        await setDoc(visitorDocRef, {
+            createdAt: serverTimestamp()
+        });
+
+        await setDoc(
+            analyticsDocRef,
+            {
+                totalViews: increment(1)
+            },
+            { merge: true }
+        );
+
+    } catch (err) {
+        console.warn("Analytics tracking failed:", err);
+    }
+}
 
         // Setup Firestore listeners using non-complex queries (Rule 2 compliant)
         function syncArcadeCollections() {
