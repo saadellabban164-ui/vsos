@@ -1319,15 +1319,14 @@ activateInMemoryFallbackMode();
     );
 
     const visitorDocRef = doc(
-        db,
-        'artifacts',
-        appId,
-        'public',
-        'data',
-        'analytics',
-        'visitors',
-        user.uid
-    );
+    db,
+    'artifacts',
+    appId,
+    'public',
+    'data',
+    'analyticsVisitors',
+    user.uid
+);
 
     try {
         const visitorSnapshot = await getDoc(visitorDocRef);
