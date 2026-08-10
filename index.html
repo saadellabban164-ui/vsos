@@ -1302,8 +1302,9 @@ activateInMemoryFallbackMode();
 activateInMemoryFallbackMode();
         }
 
-        // Initialize visitor metrics tracking using correct Rule 1 absolute path
-       async function handleVisitorMetrics() {
+        ```js
+// Initialize visitor metrics tracking
+async function handleVisitorMetrics() {
     if (!window.vsosState.currentUser || window.vsosState.useInMemoryFallback) return;
 
     const user = window.vsosState.currentUser;
@@ -1318,27 +1319,31 @@ activateInMemoryFallbackMode();
         'totals'
     );
 
+    // Each authenticated user gets one unique visitor document
     const visitorDocRef = doc(
-    db,
-    'artifacts',
-    appId,
-    'public',
-    'data',
-    'analyticsVisitors',
-    user.uid
-);
+        db,
+        'artifacts',
+        appId,
+        'public',
+        'data',
+        'analyticsVisitors',
+        user.uid
+    );
 
     try {
         const visitorSnapshot = await getDoc(visitorDocRef);
 
+        // Already counted
         if (visitorSnapshot.exists()) {
             return;
         }
 
+        // Create unique visitor record
         await setDoc(visitorDocRef, {
             createdAt: serverTimestamp()
         });
 
+        // Increment global visitor count
         await setDoc(
             analyticsDocRef,
             {
@@ -1351,6 +1356,8 @@ activateInMemoryFallbackMode();
         console.warn("Analytics tracking failed:", err);
     }
 }
+```
+
 
         // Setup Firestore listeners using non-complex queries (Rule 2 compliant)
         function syncArcadeCollections() {
