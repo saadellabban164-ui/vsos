@@ -1218,7 +1218,8 @@ window.requestVsosAiAccess = function () {
                     syncArcadeCollections();
                 } catch (err) {
                     console.error("Failed executing startup analytics sync sequence:", err);
-                    activateInMemoryFallbackMode();
+                   console.error("FALLBACK TRIGGERED", new Error().stack);
+activateInMemoryFallbackMode();
                 }
             } else {
                 window.vsosState.currentUser = null;
@@ -1251,7 +1252,8 @@ window.requestVsosAiAccess = function () {
                 // Catch auth/admin-restricted-operation (anonymous sign-in disabled in console) or unauthorized domains (GitHub pages)
                 if (error.code === 'auth/admin-restricted-operation' || error.code === 'auth/operation-not-allowed' || error.code === 'auth/unauthorized-domain') {
                     console.warn(`Firebase Auth blocked (${error.code}). Engaging diagnostic fallback session...`);
-                    activateInMemoryFallbackMode();
+                    console.error("FALLBACK TRIGGERED", new Error().stack);
+activateInMemoryFallbackMode();
                 } else {
                     throw error;
                 }
@@ -1296,7 +1298,8 @@ window.requestVsosAiAccess = function () {
         // Generic auth crash protection handler
         function handleAuthFailure(error) {
             console.warn("Authentication block detected. Transitioning directly to safe single-session mode:", error);
-            activateInMemoryFallbackMode();
+            console.error("FALLBACK TRIGGERED", new Error().stack);
+activateInMemoryFallbackMode();
         }
 
         // Initialize visitor metrics tracking using correct Rule 1 absolute path
@@ -1387,7 +1390,8 @@ window.requestVsosAiAccess = function () {
                 updateStudioStats();
             }, (error) => {
                 console.warn("Games subscription permission restricted. Moving cleanly to standalone single-session logic:", error);
-                activateInMemoryFallbackMode();
+                console.error("FALLBACK TRIGGERED", new Error().stack);
+activateInMemoryFallbackMode();
             });
 
             // 2. Sync live content feed
