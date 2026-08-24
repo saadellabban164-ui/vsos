@@ -835,7 +835,13 @@ const firebaseConfig =
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-
+signInAnonymously(auth)
+    .then(() => {
+        console.log("Firebase Anonymous Auth: OK");
+    })
+    .catch((error) => {
+        console.error("Firebase Anonymous Auth FAILED:", error);
+    });
 // Firestore data namespace
 const appId = 'vsos-app';
         // Local state store
