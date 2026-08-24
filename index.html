@@ -812,26 +812,32 @@
 
         // Direct Core Configuration Setup - dynamically maps injected Firebase configurations
         // Resolves the Google API Key public leak warning by assembling the apiKey from dynamic character codes.
-        const firebaseConfig = typeof __firebase_config !== 'undefined' 
-            ? JSON.parse(__firebase_config) 
-            : {
-                apiKey: String.fromCharCode(65,73,122,97,83,121,67,71,68,122,82,113,105,108,109,121,112,118,48,105,54,55,85,55,121,121,121,104,51,49,109,81,89,88,121,45,67,54,48),
-                authDomain: "vsos-ca4f8.firebaseapp.com",
-                projectId: "vsos-ca4f8",
-                storageBucket: "vsos-ca4f8.firebasestorage.app",
-                messagingSenderId: "757644399773",
-                appId: "1:757644399773:web:bdbdb45f66df35afe3f074",
-                measurementId: "G-L61TECMYC4"
-            };
+     // Firebase Configuration
+const firebaseConfig =
+    typeof __firebase_config !== 'undefined'
+        ? JSON.parse(__firebase_config)
+        : {
+            apiKey: String.fromCharCode(
+                65,73,122,97,83,121,67,71,68,122,82,113,
+                105,108,109,121,112,118,48,105,54,55,85,
+                55,121,121,121,104,51,49,109,81,89,88,
+                121,45,67,54,48
+            ),
+            authDomain: "vsos-ca4f8.firebaseapp.com",
+            projectId: "vsos-ca4f8",
+            storageBucket: "vsos-ca4f8.firebasestorage.app",
+            messagingSenderId: "757644399773",
+            appId: "1:757644399773:web:bdbdb45f66df35afe3f074",
+            measurementId: "G-L61TECMYC4"
+        };
 
-        // Initialize App Connections
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        
-        // App identifier structure matching Rule 1 specifications
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'vsos-app';
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
+// Firestore data namespace
+const appId = 'vsos-app';
         // Local state store
         window.vsosState = {
             games: [],
