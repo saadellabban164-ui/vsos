@@ -1321,7 +1321,10 @@ activateInMemoryFallbackMode();
 
 // Initialize visitor metrics tracking
 async function handleVisitorMetrics() {
-    if (!window.vsosState.currentUser || window.vsosState.useInMemoryFallback) return;
+    if (
+        !window.vsosState.currentUser ||
+        window.vsosState.useInMemoryFallback
+    ) return;
 
     const user = window.vsosState.currentUser;
 
@@ -2339,12 +2342,44 @@ if (!hasAiAccess) {
                 }
                 
                 resetGameForm();
-            } catch (err) {
-                console.warn("Failed executing catalog update on cloud database. Storing locally instead:", err);
-                showToast("Database write blocked. Operation fell back locally.", "error");
-            }
-        }
+                  } catch (err) {
+                console.error("Failed executing catalog update on cloud database:", err);
 
+                // Fallback to local browser memory
+                if (featured) {
+                    window.vsosState.games.forEach(g => g.featured = false);
+                }
+
+                if (editId) {
+                    const idx = window.vsosState.games.findIndex(g => g.id === editId);
+
+                    if (idx > -1) {
+                        const oldGame = window.vsosState.games[idx];
+
+                        payload.id = editId;
+                        payload.views = oldGame.views || 0;
+
+                        window.vsosState.games[idx] = payload;
+                    }
+                } else {
+                    payload.id = "local-" + Date.now();
+                    payload.views = 0;
+
+                    window.vsosState.games.unshift(payload);
+                }
+
+                renderMainCatalogUI();
+                renderFeaturedGameUI();
+                renderAdminCatalog();
+                updateStudioStats();
+                resetGameForm();
+
+                showToast(
+                    "Cloud database unavailable. Game saved locally for this session.",
+                    "error"
+                );
+            }
+         }
         function editGame(gameId) {
             playSound('click');
             const game = window.vsosState.games.find(g => g.id === gameId);
