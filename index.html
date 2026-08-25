@@ -836,8 +836,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 signInAnonymously(auth)
-    .then(() => {
+    .then((result) => {
         console.log("Firebase Anonymous Auth: OK");
+        console.log("CURRENT UID:", result.user.uid);
+        console.log("CURRENT APP ID:", appId);
     })
     .catch((error) => {
         console.error("Firebase Anonymous Auth FAILED:", error);
